@@ -40,7 +40,7 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
         }
     }
     public void sendVerificationEmail(String url) throws MessagingException, UnsupportedEncodingException {
-        String subject = "BeeTasks Email Verification";
+        String subject = "VotingVoter Email Verification";
         String senderName = "Users Verification Service";
         String mailContent = "<p> Hi, "+ user.getFirstName()+ ", </p>"+
                 "<p>Thank you for registering with us,"+"" +
@@ -52,7 +52,7 @@ public class RegistrationCompleteEventListener implements ApplicationListener<Re
 
 
     public void sendPasswordResetVerificationEmail(String url) throws MessagingException, UnsupportedEncodingException {
-        String subject = "BeeTasks Password Reset";
+        String subject = "VotingVoter Password Reset";
         String senderName = "Users Verification Service";
         String mailContent = "<p> Hi, "+ user.getFirstName()+ ", </p>"+
                 "<p><b>You recently requested to reset your password,</b>"+"" +

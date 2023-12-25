@@ -151,7 +151,7 @@
     </dependencies>
 
     <build>
-        <finalName>BeeTasks-${version}</finalName>
+        <finalName>VotingVoter-${version}</finalName>
         <plugins>
             <!--            <plugin>-->
             <!--                <groupId>org.graalvm.buildtools</groupId>-->
