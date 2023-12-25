@@ -4,7 +4,7 @@ package votingvoter.Security.user;
 //import votingvoter.Model.Department;
 
 import votingvoter.Model.User;
-import votingvoter.Repository.EmployeeRep;
+import votingvoter.Repository.UserRep;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.security.Principal;
 @Service
 @RequiredArgsConstructor
 public class PrincipalService {
-    private final EmployeeRep employeeRep;
+    private final UserRep employeeRep;
 
     public User getEmployee(Principal principal){
 //        System.out.println(principal);

@@ -5,7 +5,7 @@ package votingvoter.Security.registration.password;
 //import votingvoter.Security.user.UserRepository;
 
 import votingvoter.Model.User;
-import votingvoter.Repository.EmployeeRep;
+import votingvoter.Repository.UserRep;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PasswordResetTokenService implements IPasswordResetTokenService {
     private final PasswordResetTokenRepository passwordResetTokenRepository;
-    private final EmployeeRep userRepository;
+    private final UserRep userRepository;
     private final PasswordEncoder passwordEncoder;
 
 

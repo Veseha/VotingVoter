@@ -13,9 +13,9 @@
 //    // and to keep clean the code. Thanks!
 //
 //    MessagesRep messagesRep;
-//    EmployeeRep employeeRep;
+//    UserRep employeeRep;
 //    EventNotifications en;
-//    public CustomSendingMethods( MessagesRep messagesRep, EmployeeRep employeeRep, NotificationRep notificationRep, SubjectsRep subjectsRep){
+//    public CustomSendingMethods( MessagesRep messagesRep, UserRep employeeRep, NotificationRep notificationRep, SubjectsRep subjectsRep){
 //        this.messagesRep = messagesRep;
 //        this.employeeRep = employeeRep;
 //        en = new EventNotifications(messagesRep, employeeRep, executorPPWRep, notificationRep, subjectsRep);

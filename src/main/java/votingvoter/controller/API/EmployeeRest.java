@@ -1,7 +1,7 @@
 package votingvoter.controller.API;
 
 import votingvoter.Model.User;
-import votingvoter.ModelService.EmployeeService;
+import votingvoter.ModelService.UserSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/v1/employee")
 public class EmployeeRest {
     @Autowired
-    EmployeeService employeeService;
+    UserSer employeeService;
 
 
     @GetMapping("/getall")

@@ -14,7 +14,7 @@ import java.util.Objects;
 public class EmailService {
     private final JavaMailSender getJavaMailSender;
     private final MessagesRep messagesRep;
-    private final EmployeeRep employeeRep;
+    private final UserRep employeeRep;
     private final NotificationRep notificationRep;
     private final SubjectsRep subjectsRep;
 

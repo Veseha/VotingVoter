@@ -2,7 +2,7 @@ package votingvoter.Security.registration.token;
 
 
 import votingvoter.Model.User;
-import votingvoter.Repository.EmployeeRep;
+import votingvoter.Repository.UserRep;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class VerificationTokenService implements IVerificationTokenService {
     private final VerificationTokenRepository tokenRepository;
-    private final EmployeeRep userRepository;
+    private final UserRep userRepository;
     @Override
     public String validateToken(String token) {
         Optional<VerificationToken> theToken = tokenRepository.findByToken(token);

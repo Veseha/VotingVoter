@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EmployeeRep extends JpaRepository<User, Long> {
+public interface UserRep extends JpaRepository<User, Long> {
 
     public Optional<User> findByEmail(String email);
 //    public  User findFirstByEmail(String email);
@@ -20,5 +20,5 @@ public interface EmployeeRep extends JpaRepository<User, Long> {
             " u.lastName =:lastName," + "u.email =:email where u.id =:id")
     void update(String firstName, String lastName, String email, Long id);
 
-    public List<User> findByTeamIsNotNull();
+    public List<User> findByEmailIsNotNull();
 }

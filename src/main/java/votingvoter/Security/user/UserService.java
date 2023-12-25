@@ -1,7 +1,7 @@
 package votingvoter.Security.user;
 
 import votingvoter.Model.User;
-import votingvoter.Repository.EmployeeRep;
+import votingvoter.Repository.UserRep;
 import votingvoter.Security.registration.RegistrationRequest;
 import votingvoter.Security.registration.token.VerificationTokenService;
 import jakarta.transaction.Transactional;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserService implements IUserService {
-    private final EmployeeRep userRepository;
+    private final UserRep userRepository;
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenService verificationTokenService;
 

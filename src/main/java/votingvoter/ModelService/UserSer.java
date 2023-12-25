@@ -3,18 +3,17 @@ package votingvoter.ModelService;
 
 import votingvoter.Model.Enum.Permission;
 import votingvoter.Model.User;
-import votingvoter.Repository.EmployeeRep;
+import votingvoter.Repository.UserRep;
 import votingvoter.Security.user.PrincipalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class EmployeeService {
-    private final EmployeeRep employeeRep;
+public class UserSer {
+    private final UserRep employeeRep;
     private final PrincipalService principalService;
 
     // GET
@@ -26,7 +25,7 @@ public class EmployeeService {
     
     
     public List<User> getAllRegisteredEmployees(){
-        return employeeRep.findByTeamIsNotNull();
+        return employeeRep.findByEmailIsNotNull();
     }
     public User getEmployeeByEmail(String email){
         return employeeRep.findByEmail(email).get();

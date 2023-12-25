@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Optional;
 
-/**
- * @author Sampson Alfred
- */
+
 @Slf4j
 @Controller
 @RequestMapping("/users")

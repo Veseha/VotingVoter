@@ -1,7 +1,7 @@
 package votingvoter.controller;
 
 import votingvoter.Model.User;
-import votingvoter.ModelService.EmployeeService;
+import votingvoter.ModelService.UserSer;
 import votingvoter.Security.user.PrincipalService;
 import votingvoter.Security.utility.CurrentUser;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class MainPage {
 
-    private final EmployeeService employeeS;
+    private final UserSer employeeS;
     private final PrincipalService principalS;
 
     @GetMapping("/")

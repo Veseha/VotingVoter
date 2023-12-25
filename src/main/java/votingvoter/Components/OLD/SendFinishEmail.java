@@ -22,7 +22,7 @@ package votingvoter.Components.OLD;//package votingvoter.Components.Email;
 ////    @Autowired
 ////    NETypeRep neTypeRep;
 ////    @Autowired
-////    EmployeeRep employeeRep;
+////    UserRep employeeRep;
 ////    @Autowired
 ////    PrivilegesRep privilegesRep;
 ////    @Autowired
@@ -40,14 +40,14 @@ package votingvoter.Components.OLD;//package votingvoter.Components.Email;
 //    Long id_ppw = 0L;
 //
 //    PPWRep ppwRep;
-//    EmployeeRep employeeRep;
+//    UserRep employeeRep;
 //    ExecutorPPWRep executorPPWRep;
 //    MessagesRep messagesRep;
 //    JavaMailSender getJavaMailSender;
 //    NEPPWRep neppwRep;
 //
 //    public SendFinishEmail(SendEmailMethod sendEmailMethod, GetPPWId ppw, PPWRep ppwRep,
-//                           EmployeeRep employeeRep,
+//                           UserRep employeeRep,
 //                           ExecutorPPWRep executorPPWRep,
 //                           MessagesRep messagesRep,
 //                           JavaMailSender getJavaMailSender,
@@ -72,7 +72,7 @@ package votingvoter.Components.OLD;//package votingvoter.Components.Email;
 //            PPWRep ppwRep,
 ////    NERep neRep,
 ////    NETypeRep neTypeRep,
-//    EmployeeRep employeeRep,
+//    UserRep employeeRep,
 ////    PrivilegesRep privilegesRep,
 ////    TeamRep teamRep,
 ////    StatusRep statusRep,

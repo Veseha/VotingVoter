@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.envers.Audited;
 
-/**
- * @author Sampson Alfred
- */
+
 @Entity
 @Getter
 @Audited

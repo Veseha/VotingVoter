@@ -20,13 +20,13 @@
 //    // Service variables part
 //    MessageSendingService mss = new MessageSendingService();
 //    MessagesRep messagesRep;
-//    EmployeeRep employeeRep;
+//    UserRep employeeRep;
 ////    PrivilegesRep privilegesRep;
 //    NotificationRep notificationRep;
 //    SubjectsRep subjectsRep;
 //
 //    // Initialization part
-//    public EventNotifications( MessagesRep messagesRep, EmployeeRep employeeRep,  NotificationRep notificationRep, SubjectsRep subjectsRep){
+//    public EventNotifications( MessagesRep messagesRep, UserRep employeeRep,  NotificationRep notificationRep, SubjectsRep subjectsRep){
 //        this.messagesRep = messagesRep;
 //        this.employeeRep = employeeRep;
 ////        this.privilegesRep = privilegesRep;

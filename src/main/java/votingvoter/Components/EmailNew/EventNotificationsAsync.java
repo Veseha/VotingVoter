@@ -11,14 +11,14 @@
 //    JavaMailSender jms;
 //    NotificationType nt;
 //    User employee;
-//    public EventNotificationsAsync(PPW ppw, JavaMailSender getJavaMailSender, MessagesRep messagesRep, EmployeeRep employeeRep, ExecutorPPWRep executorPPWRep, NotificationRep notificationRep, SubjectsRep subjectsRep, NotificationType NT){
+//    public EventNotificationsAsync(PPW ppw, JavaMailSender getJavaMailSender, MessagesRep messagesRep, UserRep employeeRep, ExecutorPPWRep executorPPWRep, NotificationRep notificationRep, SubjectsRep subjectsRep, NotificationType NT){
 //        this.jms = getJavaMailSender;
 //        this.ppw = ppw;
 //        this.nt = NT;
 //        en = new EventNotifications(messagesRep, employeeRep, executorPPWRep, notificationRep, subjectsRep);
 //
 //    }
-//    public EventNotificationsAsync(User employee, JavaMailSender getJavaMailSender, MessagesRep messagesRep, EmployeeRep employeeRep, ExecutorPPWRep executorPPWRep, NotificationRep notificationRep, SubjectsRep subjectsRep, NotificationType NT){
+//    public EventNotificationsAsync(User employee, JavaMailSender getJavaMailSender, MessagesRep messagesRep, UserRep employeeRep, ExecutorPPWRep executorPPWRep, NotificationRep notificationRep, SubjectsRep subjectsRep, NotificationType NT){
 //        this.jms = getJavaMailSender;
 //        this.employee = employee;
 //        this.nt = NT;
