@@ -19,4 +19,8 @@ public class Answer {
     private String answerName;
 
     private String answerText;
+
+    @ManyToOne
+    @JoinColumn(name = "questionId")
+    private Question question;
 }
