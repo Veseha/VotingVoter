@@ -1,0 +1,457 @@
+<div class="container" th:fragment="contentFragment">
+  <h2 th:text="${title}"></h2>
+
+  <div class="row mb-3">
+    <div class="col">
+      <div class="btn-group">
+        <button class="btn btn-secondary" onclick="filterTable('all')">All</button>
+        <button class="btn btn-secondary" onclick="filterTable('Planned')">Planned</button>
+        <button class="btn btn-secondary" onclick="filterTable('Assigned')">Assigned</button>
+        <button class="btn btn-secondary" onclick="filterTable('Completed')">Completed</button>
+        <button class="btn btn-secondary" onclick="filterTable('Canceled')">Canceled</button>
+
+      </div>
+      <button class="btn btn-success" onclick="colorizeTable(true)">
+<!--        Color-->
+
+        <i  class="fas fa-brush"></i>
+      </button>
+      <button id="downlodbtn" class="btn btn-primary">
+        <!--    Download-->
+        <i id="themeIcon_4" class="fas fa-file-csv"></i>
+      </button>
+    </div>
+    <div class="col">
+      <input type="text" class="form-control me-2" id="searchInput" oninput="searchTable()" placeholder="Search...">
+
+    </div>
+  </div>
+
+
+  <table class="table" id="ppwTable">
+    <thead>
+    <tr>
+      <th></th>
+      <th>
+        <div class="d-flex align-items-center justify-content-between">
+          <span>ID</span>
+          <button class="btn btn-link btn-sm" onclick="sortTable('id')">
+            <i class="fas fa-sort"></i>
+          </button>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex align-items-center justify-content-between">
+          <span>Name</span>
+          <button class="btn btn-link btn-sm" onclick="sortTable('name')">
+            <i class="fas fa-sort"></i>
+          </button>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex align-items-center justify-content-between">
+          <span>CRQ</span>
+          <button class="btn btn-link btn-sm" onclick="sortTable('crq')">
+            <i class="fas fa-sort"></i>
+          </button>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex align-items-center justify-content-between">
+          <span>Planeddate</span>
+          <button class="btn btn-link btn-sm" onclick="sortTable('planeddate')">
+            <i class="fas fa-sort"></i>
+          </button>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex align-items-center justify-content-between">
+          <span>Workdate</span>
+          <button class="btn btn-link btn-sm" onclick="sortTable('workdate')">
+            <i class="fas fa-sort"></i>
+          </button>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex align-items-center justify-content-between">
+          <span>Team</span>
+          <button class="btn btn-link btn-sm" onclick="sortTable('team')">
+            <i class="fas fa-sort"></i>
+          </button>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex align-items-center justify-content-between">
+          <span>NE</span>
+          <button class="btn btn-link btn-sm" onclick="sortTable('ne')">
+            <i class="fas fa-sort"></i>
+          </button>
+        </div>
+      </th>
+      <th>
+        <div class="d-flex align-items-center justify-content-between">
+          <span>Status</span>
+          <button class="btn btn-link btn-sm" onclick="sortTable('status')">
+            <i class="fas fa-sort"></i>
+          </button>
+        </div>
+      </th>
+
+      <th>
+        Executors
+      </th>
+      <th>
+        Comments
+      </th>
+
+      <th></th>
+      <th></th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="display: table-row" th:each="ppw : ${ppwList}">
+      <td>
+        <button class="btn btn-outline-primary btn-sm" onclick="view_ppw_page_redirect(this)" th:data-id="${ppw.id}">
+          <i id="themeIcon" class="fas fa-eye"></i>
+          <span></span>
+<!--          View-->
+        </button>
+      </td>
+      <td style="display: table-cell" th:text="${ppw.id}"></td>
+      <td style="display: table-cell" th:text="${ppw.name}"></td>
+      <td style="display: table-cell" >
+        <a th:text="${ppw.crq}"  th:href="@{'https://kz-bmcmid02.vshcorp.kz:8443/arsys/forms/kz-bmccore01/CHG%3AInfrastructure+Change/Best+Practice+View/?qual=%271000000182%27+%3D+%22CRQ-' + ${ppw.crq} + '%22&cacheid=b6147304'}   "></a>
+      </td>
+      <td style="display: table-cell" th:text="${ppw.planeddate}"></td>
+      <td style="display: table-cell" th:text="${ppw.workdate}"></td>
+      <td style="display: table-cell" th:text="${ppw.team.name}"></td>
+      <td style="display: table-cell" class="timetable_event" th:text="${ppw.getNe_list}"></td>
+      <td style="display: table-cell" th:text="${ppw.status.name}"></td>
+      <td style="display: table-cell" class="timetable_event" th:text="${ppw.getExecutors_list}"></td>
+      <td style="display: table-cell" class="timetable_event" >
+<!--        <span class="truncate-text" data-bs-toggle="popover"  th:text="${ppw.comments}" th:data-bs-content="${ppw.comments}">-->
+<!--        </span>-->
+        <label style="white-space: pre-line" th:text="${ppw.comments}"></label>
+      </td>
+      <td>
+        <button class="btn btn-primary btn-sm" onclick="quick_edit_page_redirect(this)" th:data-id="${ppw.id}"  th:if="${ppw.status.name.toString() != 'Completed' and ppw.status.name.toString() != 'Canceled' }"  th:disabled="${ppw.status.name.toString() == 'completed'}" title="Edit PPW">
+<!--          Edit-->
+          <i id="themeIcon_2" class="fas fa-tools"></i>
+          <span></span>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-info btn-sm" onclick="tasks_page_redirect(this)" th:data-id="${ppw.id}"  th:if="${ppw.multitasks == true and (ppw.status.name.toString() != 'Completed' and ppw.status.name.toString() != 'Canceled') }" th:disabled="${ppw.status.name == false}" title="List of Tasks">
+          <i id="themeIcon_3" class="fas fa-list-ul"></i>
+          <span></span>
+        </button>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+<script>
+  // var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+  // var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  //   return new bootstrap.Popover(popoverTriggerEl)
+  // })
+  //
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   var truncateTextElements = document.querySelectorAll('.truncate-text');
+  //
+  //   truncateTextElements.forEach(function (element) {
+  //     var text = element.textContent;
+  //     if (text.length > 20) {
+  //       var truncatedText = text.substring(0, 20) + '...';
+  //       element.textContent = truncatedText;
+  //     } else {
+  //       // Если текст короче 20 символов, убираем всплывающее окно
+  //       element.removeAttribute('data-bs-toggle');
+  //       element.removeAttribute('data-bs-content');
+  //     }
+  //   });
+  // });
+
+  function tableToCSV() {
+
+    // Variable to store the final csv data
+    var csv_data = [];
+
+    // Get each row data
+    var rows = document.getElementsByTagName('tr');
+    for (var i = 0; i < rows.length; i++) {
+
+      // Get each column data
+      var cols = rows[i].querySelectorAll('td,th');
+
+      // Stores each csv row data
+      var csvrow = [];
+      for (var j = 0; j < cols.length; j++) {
+
+        // Get the text data of each cell
+        // of a row and push it to csvrow
+        csvrow.push(cols[j].innerText);
+      }
+
+      // Combine each column value with comma
+      csv_data.push(csvrow.join(";"));
+    }
+
+    // Combine each row data with new line character
+    csv_data = csv_data.join('\n');
+
+    // Call this function to download csv file
+    downloadCSVFile(csv_data);
+
+  }
+  function downloadCSVFile(csv_data) {
+
+    // Create CSV file object and feed
+    // our csv_data into it
+    CSVFile = new Blob([csv_data], {
+      type: "text/csv"
+    });
+
+    // Create to temporary link to initiate
+    // download process
+    var temp_link = document.createElement('a');
+
+    // Download csv file
+    var date = new Date().toLocaleDateString("ru-RU");;
+    temp_link.download = "PPWs_" + date + ".csv";
+    var url = window.URL.createObjectURL(CSVFile);
+    temp_link.href = url;
+
+    // This link should not be displayed
+    temp_link.style.display = "none";
+    document.body.appendChild(temp_link);
+
+    // Automatically click the link to
+    // trigger download
+    temp_link.click();
+    document.body.removeChild(temp_link);
+  }
+  document.querySelector("#downlodbtn").addEventListener("click", (e) => {
+    tableToCSV();
+  });
+  var state_color;
+  var color = getCookie('color');
+  if (!color) {
+    document.cookie = `color=0; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+    color = 0;
+  }
+  state_color = color;
+  colorizeTable(true);
+
+  function getCookie(name) {
+    var cookieArr = document.cookie.split(';');
+
+    for (var i = 0; i < cookieArr.length; i++) {
+      var cookiePair = cookieArr[i].split('=');
+      var cookieName = cookiePair[0].trim();
+
+      if (cookieName === name) {
+        return decodeURIComponent(cookiePair[1]);
+      }
+    }
+
+    return null;
+  }
+  function quick_edit_page_redirect(button){
+    if (!button.disabled) {
+      var id = button.getAttribute('data-id');
+      window.location.href = '/qppw/' + id;
+    }
+  }
+  function tasks_page_redirect(button){
+    if (!button.disabled) {
+      var id = button.getAttribute('data-id');
+      window.location.href = '/tasklist/' + id;
+    }
+  }
+  function view_ppw_page_redirect(button){
+    if (!button.disabled) {
+      var id = button.getAttribute('data-id');
+      window.location.href = '/ppw/' + id;
+    }
+  }
+
+  var sortDirections = {
+    workdate: 1, // 1 - ascending, -1 - descending
+    status: 1,
+    ne: 1,
+    team:1,
+    id:1,
+    name:1,
+    crq:1,
+    planeddate:1
+  };
+  function sortTable(column) {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("ppwTable");
+    switching = true;
+    while (switching) {
+      switching = false;
+      rows = table.getElementsByTagName("tr");
+      for (i = 1; i < (rows.length - 1); i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("td")[getColumnIndex(column)];
+        y = rows[i + 1].getElementsByTagName("td")[getColumnIndex(column)];
+        if (sortDirections[column] === 1) {
+          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        } else {
+          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            shouldSwitch = true;
+            break;
+          }
+        }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+    sortDirections[column] *= -1;
+    updateSortIcon(column);
+  }
+  function getColumnIndex(column) {
+    var headerRow = document.querySelector("#ppwTable thead tr");
+    var headers = headerRow.getElementsByTagName("th");
+    for (var i = 0; i < headers.length; i++) {
+      if (headers[i].innerText.trim().toLowerCase() === column.toLowerCase()) {
+        return i;
+      }
+    }
+    return -1;
+  }
+  function updateSortIcon(column) {
+    var sortButton = document.querySelector(`button[onclick="sortTable('${column}')"]`);
+    var sortIcon = sortButton.querySelector("i");
+    sortIcon.classList.remove("fa-sort", "fa-sort-up", "fa-sort-down");
+    if (sortDirections[column] === 1) {
+      sortIcon.classList.add("fa-sort-up");
+    } else {
+      sortIcon.classList.add("fa-sort-down");
+    }
+  }
+  function filterTable(filter) {
+    var rows = document.getElementById("ppwTable").getElementsByTagName("tr");
+    for (var i = 1; i < rows.length; i++) {
+      var row = rows[i];
+      if (filter === "all") {
+        row.style.display = "";
+      } else {
+        // var var_1 = row.getElementsByTagName("td");
+        // var var_2 = var_1[7];
+        // var var_3 = var_2.innerText;
+        // var var_4 = var_3.toLowerCase();
+        var status = row.getElementsByTagName("td")[8].innerText;
+        if (status === filter) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      }
+    }
+  }
+  function searchTable() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("searchInput");
+    filter = input.value.toLowerCase();
+    table = document.getElementById("ppwTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 1; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td");
+      var found = false;
+
+      for (var j = 0; j < td.length; j++) {
+        txtValue = td[j].textContent || td[j].innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+          found = true;
+          break;
+        }
+      }
+
+      if (found) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+  function colorizeTable(check) {
+    var table = document.getElementById("ppwTable");
+    var rows = table.getElementsByTagName("tr");
+
+    if(state_color === 0 || state_color === '0'){
+      if(check){
+        state_color = 1;
+        document.cookie = `color=0; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+      }
+      for (var i = 1; i < rows.length; i++) {
+        var cell = rows[i].getElementsByTagName("td")[8];
+        var status = cell.innerHTML.trim();
+        var className = "";
+
+        switch (status) {
+          case "Planned":
+            className = "table-warning";
+            break;
+          case "Assigned":
+            className = "table-danger";
+            break;
+          case "Completed":
+            className = "table-success";
+            break;
+          case "Canceled":
+            className = "table-secondary";
+            break;
+          default:
+            break;
+        }
+
+        rows[i].className = className;
+      }
+    }else{
+      if(check){
+        state_color = 0;
+        document.cookie = `color=1; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+      }
+      for (var i = 1; i < rows.length; i++) {
+        var cell = rows[i].getElementsByTagName("td")[8];
+        var status = cell.innerHTML.trim();
+        var className = "";
+
+        switch (status) {
+          case "Planned":
+            className = "table-warning";
+            break;
+          case "Assigned":
+            className = "table-danger";
+            break;
+          case "Completed":
+            className = "table-success";
+            break;
+          case "Canceled":
+            className = "table-secondary";
+            break;
+          default:
+            break;
+        }
+
+        rows[i].classList.remove(className);
+      }
+    }
+
+
+
+  }
+</script>
+</div>

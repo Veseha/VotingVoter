@@ -1,0 +1,35 @@
+<div class="container" th:fragment="contentFragment">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center">
+                <h1 class="mt-5">Error 500</h1>
+                <p class="lead">Oops! We have some internal server error</p>
+                <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <div class="content">
+        <div class="container offset-sm-3 col-md-8 mt-lg-5">
+            <!-- show errors if any . -->
+
+            <div class="row mt-2">
+                <div th:if="${param.invalid}" class="col-sm-8">
+                    <p class="alert alert-danger">Invalid verification token</p>
+                </div>
+
+                <div th:if="${param.expired}" class="col-sm-8">
+                    <p class="alert alert-info">This verification link has already expired.</p>
+                </div>
+            </div>
+<!--            <a href="#" th:href="@{/static}">Go to home page</a>-->
+        </div>
+    </div>
+
+</div>

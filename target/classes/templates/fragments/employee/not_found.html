@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email not found</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 text-center">
+      <h1 class="mt-5">The email not found</h1>
+      <p class="lead">Please, try again.</p>
+      <a href="/addemployee">(click here if a form don't open)</a>
+<!--      <button class="btn btn-primary" onclick="goBack()">Go Back</button>-->
+    </div>
+  </div>
+</div>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  setTimeout(function(){
+    window.location.href = "/addemployee";
+  }, 4000);
+</script>
+
+</body>
+
+</html>

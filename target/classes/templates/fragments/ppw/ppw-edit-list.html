@@ -1,0 +1,11 @@
+<div class="container" th:fragment="contentFragment">
+  <h2>PPW List for edit</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="list-group">
+        <a th:each="ppw : ${ppwList}" th:href="@{/editppw/{id}(id=${ppw.id})}"
+           class="list-group-item list-group-item-action" th:text="${ppw.name}"></a>
+      </div>
+    </div>
+  </div>
+</div>

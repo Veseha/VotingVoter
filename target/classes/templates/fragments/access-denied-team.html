@@ -1,0 +1,22 @@
+<div class="container" th:fragment="contentFragment">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 text-center">
+<!--        <h1 class="mt-5">Error 403</h1>-->
+        <h1 class="mt-5">Access denied</h1>
+        <h2 class="mt-5">You do not have access to the requested object because he is in another group.</h2>
+        <p class="lead">Oops! The page you were looking for is not available to you.</p>
+        <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+        <label class="mt-5">Auto redirect in 3 seconds...</label>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+    setTimeout(function(){
+      goBack();}, 4000);
+  </script>
+</div>

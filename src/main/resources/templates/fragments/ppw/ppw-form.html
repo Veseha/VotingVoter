@@ -1,0 +1,130 @@
+<div class="container" th:fragment="contentFragment">
+  <h2>PPW Form</h2>
+  <form action="/addppw" method="post">
+
+      <div class="form-group">
+          <label for="team">Team:</label>
+          <select class="form-control" id="team" name="team.id" required>
+              <option th:each="team : ${teamList}" th:value="${team.id}" th:text="${team.name}" onclick="ChangeTeam()" th:selected="${team.id == teamSel}"></option>
+          </select>
+      </div>
+
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+
+<!--    <div class="form-group">-->
+<!--      <label for="ne">NE:</label>-->
+<!--      <select class="form-control" id="ne" name="ne_.id_ne" required>-->
+<!--        <option th:each="ne_ : ${neList}" th:value="${ne_.id_ne}" th:text="${ne_.nename}"></option>-->
+<!--      </select>-->
+<!--    </div>-->
+    <div class="form-group">
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-2">
+              <h6>Selected NE</h6>
+              <select id="selectedNEs" class="form-select" multiple="multiple" name="ne_"  size="5">
+                <option th:each="ne_ : ${my_ne}" th:value="${ne_.id_ne}" th:text="${ne_.nename}">
+<!--                        onclick="moveSelectedNEs('selectedNEs', 'availableNEs')"-->
+                </option>
+              </select>
+            </div>
+            <div class="col-1 align-self-center">
+              <div class="text-center">
+                <div class="row g-2">
+                  <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                            onclick="moveSelectedNEs('selectedNEs', 'availableNEs')">></button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                            onclick="moveSelectedNEs('availableNEs', 'selectedNEs')"><</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                            onclick="moveAllNEs('selectedNEs', 'availableNEs')">>></button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                            onclick="moveAllNEs('availableNEs', 'selectedNEs')"><<</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-2">
+              <h6>Available NE</h6>
+              <select id="availableNEs" class="form-select" multiple="multiple" size="5">
+                <option th:each="ne_ : ${all_ne}" th:value="${ne_.id_ne}" th:text="${ne_.nename}">
+<!--                        onclick="moveSelectedNEs('availableNEs', 'selectedNEs')"-->
+                </option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="planeddate">Planned Date:</label>
+      <input type="date" class="form-control" id="planeddate" name="planeddate" required>
+    </div>
+<!--    <div class="form-group">-->
+<!--      <label for="workdate">Work Date:</label>-->
+<!--      <input type="date" class="form-control" id="workdate" name="workdate">-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <label for="crq">CRQ:</label>-->
+<!--      <input type="text" class="form-control" id="crq" name="crq">-->
+<!--    </div>-->
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select class="form-control" id="status" name="status.id_status" required>
+        <option th:each="status : ${statusList}" th:value="${status.id_status}" th:text="${status.name}"></option>
+      </select>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="multitasks" value="true" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        This PPW supports the tasks.
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary" onclick="selectAll();">Save</button>
+    <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+
+  </form>
+    <script src="/scripts.js"></script>
+  <script th:inline="javascript">
+    var counter = 0;
+    // var employeesList = /*[[${employeesList}]]*/ [];
+    // var employeesList_back = /*[[${employeesList}]]*/ [];
+    var neList = /*[[${my_ne}]]*/ []
+    var executorsList = [];
+
+    var select_ne = document.getElementById('availableNEs');
+    var optionsToDelete = neList.map(function(ne) {
+        return ne.id_ne.toString();
+    });
+
+    for (let i = select_ne.options.length - 1; i >= 0; i--) {
+        if (optionsToDelete.includes(select_ne.options[i].value)) {
+            select_ne.remove(i);
+        }
+    }
+
+    function ChangeTeam(){
+        var list = document.getElementById("team");
+        var value = list.value;
+        window.location.replace("/addppw/" + value)
+    }
+
+    function moveNEs(sourceId, targetId) {
+      var sourceSelect = document.getElementById(sourceId);
+      var targetSelect = document.getElementById(targetId);
+      var selectedOptions = [].slice.call(sourceSelect);
+      selectedOptions.forEach(function (option) {
+        targetSelect.appendChild(option);
+      });
+    }
+
+  </script>
+
+</div>

@@ -1,0 +1,137 @@
+<div class="container" th:fragment="contentFragment">
+  <div>
+    <div class="row mb-3">
+      <div class="col">
+
+        <div class="btn-group">
+          <a title="list of Access" class=" btn btn-success mr-auto" href="/access/list">
+            <i class="fas fa-shield-halved"></i>
+            <i class="fas fa-bars"></i>
+          </a>
+          <div class="alert alert-dark m-0 px-0"></div>
+          <a title="Add Access" class=" btn btn-success mr-auto" href="/access/add">
+            <i class="fas fa-shield-halved"></i>
+            <i class="fas fa-plus"></i>
+          </a>
+        </div>
+
+        <div class="btn-group">
+          <a title="Team list" class=" btn btn-primary mr-auto " href="/team/list">
+            <i class="fas fa-user-group"></i>
+            <i class="fas fa-bars"></i>
+          </a>
+          <div class="alert alert-dark m-0 px-0"></div>
+          <a title="Add team" class=" btn btn-primary mr-auto " href="/team/add">
+            <i class="fas fa-user-group"></i>
+            <i class="fas fa-plus"></i>
+          </a>
+        </div>
+
+        <div class="btn-group">
+          <a title="list of User" class=" btn btn-primary mr-auto" href="/employee/list">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-bars"></i>
+          </a>
+          <div class="alert alert-dark m-0 px-0"></div>
+          <a title="Add employee" class=" btn btn-primary mr-auto" href="/employee/add">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-plus"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h2>Access Edit</h2>
+    <form action="#" th:action="@{/access/edit/{id}(id=${access.id})}" method="post">
+      <div class="form-group">
+        <label name="id" th:text="${access.id}"></label>
+        <label for="model">Model (Type of object):</label>
+        <select class="form-control" id="model" name="model" required>
+          <option  th:value="${access.model}" th:text="${access.model}"></option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="privlvl">Privilege level:</label>
+        <select class="form-control" id="privlvl" name="privlvl.id" required>
+          <option  th:value="${access.privlvl.id}" th:text="${access.privlvl.name}"></option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="influencelvl">Influence level:</label>
+        <select class="form-control" id="influencelvl" name="influencelvl.id">
+          <option th:if="${access.influencelvl != null}" th:value="${access.influencelvl.id}" th:text="${access.influencelvl.name}"></option>
+          <option th:unless="${access.influencelvl != null}" value=""></option>
+
+        </select>
+      </div>
+
+      <br>
+      <button type="button" id="selectAll" class="btn btn-sm btn-secondary" onclick="checkAll()"> <span class="sub"></span> Select all</button>
+
+      <div class="form-check">
+        <label class="form-check-label" for="flexCheckDefault1">
+         - Read
+        </label>
+        <input class="form-check-input" type="checkbox" name="read_" value=true id="flexCheckDefault1"  th:checked="${access.read_}">
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="flexCheckDefault2">
+         - Create
+        </label>
+        <input class="form-check-input" type="checkbox" name="create_" value="true" id="flexCheckDefault2" th:checked="${access.create_}">
+
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="flexCheckDefault3">
+         - Assigned
+        </label>
+        <input class="form-check-input" type="checkbox" name="assigned_" value="true" id="flexCheckDefault3" th:checked="${access.assigned_}">
+
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="flexCheckDefault4">
+          - Edit
+        </label>
+        <input class="form-check-input" type="checkbox" name="edit_" value="true" id="flexCheckDefault4" th:checked="${access.edit_}">
+
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="flexCheckDefault5">
+          - Delete
+        </label>
+        <input class="form-check-input" type="checkbox" name="delete_" value="true" id="flexCheckDefault5" th:checked="${access.delete_}">
+
+      </div>
+      <div class="form-check">
+        <label class="form-check-label" for="flexCheckDefault6">
+          - Close
+        </label>
+        <input class="form-check-input" type="checkbox" name="close_" value="true" id="flexCheckDefault6" th:checked="${access.close_}">
+
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+
+    </form>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function checkAll(){
+      if (document.getElementById('selectAll').classList.contains('allChecked')) {
+        $('input[type="checkbox"]').prop('checked', false);
+        document.getElementById('selectAll').classList.remove('allChecked');
+      } else {
+        $('input[type="checkbox"]').prop('checked', true);
+        document.getElementById('selectAll').classList.add('allChecked');
+      }
+    }
+  </script>
+
+</div>

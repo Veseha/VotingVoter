@@ -1,0 +1,144 @@
+<div class="container" th:fragment="contentFragment">
+<!--  <table>-->
+<!--    <td>-->
+<!--&lt;!&ndash;      <h2> All PPW in calendar</h2>&ndash;&gt;-->
+<!--    </td>-->
+<!--  </table>-->
+<!--  <br>-->
+
+  <div id="calendar"></div>
+
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+  <script  th:inline="javascript">
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var list_tasks = [];
+      var list_t = [[${ppwList}]];
+      for (let i = 0; i < list_t.length; i++) {
+        console.log(list_t[i]);
+        if(list_t[i].status.name === "Assigned"){
+          list_tasks.push({title: list_t[i].name + "", start: list_t[i].workdate, className: 'bg-danger', url: 'ppw/' + list_t[i].id});
+        }
+        else if(list_t[i].status.name === "Planned"){
+          list_tasks.push({title: list_t[i].name + "", start: list_t[i].planeddate, className: 'bg-warning', url: 'ppw/' + list_t[i].id});
+
+        }
+        else if(list_t[i].status.name === "Canceled"){
+          list_tasks.push({title: list_t[i].name + "", start: list_t[i].workdate, className: 'bg-secondary', url: 'ppw/' + list_t[i].id});
+
+        }
+        else if(list_t[i].status.name === "Completed"){
+          list_tasks.push({title: list_t[i].name + "", start: list_t[i].workdate, className: 'bg-success', url: 'ppw/' + list_t[i].id});
+
+        }
+        else{
+          list_tasks.push({title: list_t[i].name + "", start: list_t[i].workdate, className: 'bg-success'});
+        }
+      }
+
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        theme: true,
+        themeSystem: 'bootstrap5',
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,listMonth'
+        },
+        height: 600,
+        weight: 600,
+        // contentHeight: 290,
+        aspectRatio: 0.25,
+        weekNumbers: true,
+        dayMaxEvents: false,
+        editable: false,
+        navLinks: false,
+        events: list_tasks
+      });
+      calendar.render();
+    });
+
+    // const element = document.getElementById("calendar");
+    //
+    // var todayDate = moment().startOf("day");
+    // var YM = todayDate.format("YYYY-MM");
+    // var YESTERDAY = todayDate.clone().subtract(1, "day").format("YYYY-MM-DD");
+    // var TODAY = todayDate.format("YYYY-MM-DD");
+    // var TOMORROW = todayDate.clone().add(1, "day").format("YYYY-MM-DD");
+    //
+    // var calendarEl = document.getElementById("calendar");
+    // var calendar = new FullCalendar.Calendar(calendarEl, {
+    //     headerToolbar: {
+    //         left: "prev,next today",
+    //         center: "title",
+    //         right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+    //     },
+    //
+    //     height: 800,
+    //     contentHeight: 780,
+    //     aspectRatio: 3,  // see: https://fullcalendar.io/docs/aspectRatio
+    //
+    //     nowIndicator: true,
+    //     now: TODAY + "T09:25:00", // just for demo
+    //
+    //     views: {
+    //         dayGridMonth: { buttonText: "month" },
+    //         timeGridWeek: { buttonText: "week" },
+    //         timeGridDay: { buttonText: "day" }
+    //     },
+    //
+    //     initialView: "dayGridMonth",
+    //     initialDate: TODAY,
+    //
+    //     editable: true,
+    //     dayMaxEvents: true, // allow "more" link when too many events
+    //     navLinks: true,
+    //     events: [
+    //         ...
+    //     ],
+    //
+    //     eventContent: function (info) {
+    //         var element = $(info.el);
+    //
+    //         if (info.event.extendedProps && info.event.extendedProps.description) {
+    //             if (element.hasClass("fc-day-grid-event")) {
+    //                 element.data("content", info.event.extendedProps.description);
+    //                 element.data("placement", "top");
+    //                 KTApp.initPopover(element);
+    //             } else if (element.hasClass("fc-time-grid-event")) {
+    //                 element.find(".fc-title").append("<div class="fc-description">" + info.event.extendedProps.description + "</div>");
+    //             } else if (element.find(".fc-list-item-title").lenght !== 0) {
+    //                 element.find(".fc-list-item-title").append("<div class="fc-description">" + info.event.extendedProps.description + "</div>");
+    //             }
+    //         }
+    //     }
+    // });
+    //
+    // calendar.render();
+
+
+    // $(document).ready(function () {
+    //     $('#calendar').fullCalendar({
+    //         defaultView: 'month',
+    //         header: {
+    //             left: 'prev,next today',
+    //             center: 'title',
+    //             right: 'month,agendaWeek,agendaDay'
+    //         },
+    //         events: [
+    //             {
+    //                 title: 'Запланировано',
+    //                 start: moment('${ppw.planneddate}').format('YYYY-MM-DD'),
+    //                 className: 'highlight'
+    //             },
+    //             {
+    //                 title: 'Рабочая дата',
+    //                 start: moment('${ppw.workdate}').format('YYYY-MM-DD'),
+    //                 className: 'highlight'
+    //             }
+    //         ]
+    //     });
+    // });
+  </script>
+</div>

@@ -1,0 +1,245 @@
+<div class="container" th:fragment="contentFragment">
+    <h2 th:text="${title}"></h2>
+
+    <div class="row mb-3">
+        <div class="col">
+            <input type="text" class="form-control me-2" id="searchInput" oninput="searchTable()" placeholder="Search...">
+        </div>
+    </div>
+
+
+    <table class="table" id="historyTable">
+        <thead>
+        <tr>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>ID</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('id')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>Name</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('name')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>CRQ</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('crq')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>Planeddate</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('planeddate')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>Workdate</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('workdate')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>Team</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('team')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>NE</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('ne')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>Status</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('status')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>Executors</th>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>UpdateBy</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('updateby')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>Update</span>
+                    <button class="btn btn-link btn-sm" onclick="sortTable('update')">
+                        <i class="fas fa-sort"></i>
+                    </button>
+                </div>
+            </th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr style="display: table-row" th:each="ppw : ${historyList}">
+                <td style="display: table-cell" th:text="${ppw.id}"></td>
+                <td style="display: table-cell" th:text="${ppw.name}"></td>
+                <td style="display: table-cell" th:text="${ppw.crq}"></td>
+                <td style="display: table-cell" th:text="${ppw.planeddate}"></td>
+                <td style="display: table-cell" th:text="${ppw.workdate}"></td>
+                <td style="display: table-cell" th:text="${ppw.team.name}"></td>
+                <td style="display: table-cell" th:text="${ppw.ne_list}"></td>
+                <td style="display: table-cell" th:text="${ppw.status.name}"></td>
+                <td style="display: table-cell" th:text="${ppw.executors_list}"></td>
+                <td style="display: table-cell" th:text="${ppw.updatedBy}"></td>
+                <td style="display: table-cell" th:text="${ppw.updatedDate}"></td>
+                <td style="display: table-cell" th:text="${ppw.operation}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function quick_edit_page_redirect(button){
+            if (!button.disabled) {
+                var id = button.getAttribute('data-id');
+                window.location.href = '/qppw/' + id;
+            }
+        }
+        function view_ppw_page_redirect(button){
+            if (!button.disabled) {
+                var id = button.getAttribute('data-id');
+                window.location.href = '/ppw/' + id;
+            }
+        }
+
+
+        var sortDirections = {
+            id: 1, // 1 - ascending, -1 - descending
+            column_cell: 1,
+            id_cell: 1,
+            before:1,
+            after:1,
+            employee:1,
+            date_change:1,
+            type:1,
+            update:1,
+            updateby:1
+        };
+
+        function sortTable(column) {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("historyTable");
+            switching = true;
+            while (switching) {
+                switching = false;
+                rows = table.getElementsByTagName("tr");
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[getColumnIndex(column)];
+                    y = rows[i + 1].getElementsByTagName("td")[getColumnIndex(column)];
+                    if (sortDirections[column] === 1) {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+            sortDirections[column] *= -1;
+            updateSortIcon(column);
+        }
+
+        function getColumnIndex(column) {
+            var headerRow = document.querySelector("#ppwTable thead tr");
+            var headers = headerRow.getElementsByTagName("th");
+            for (var i = 0; i < headers.length; i++) {
+                if (headers[i].innerText.trim().toLowerCase() === column.toLowerCase()) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        function updateSortIcon(column) {
+            var sortButton = document.querySelector(`button[onclick="sortTable('${column}')"]`);
+            var sortIcon = sortButton.querySelector("i");
+            sortIcon.classList.remove("fa-sort", "fa-sort-up", "fa-sort-down");
+            if (sortDirections[column] === 1) {
+                sortIcon.classList.add("fa-sort-up");
+            } else {
+                sortIcon.classList.add("fa-sort-down");
+            }
+        }
+
+        function filterTable(filter) {
+            var rows = document.getElementById("ppwTable").getElementsByTagName("tr");
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i];
+                if (filter === "all") {
+                    row.style.display = "";
+                } else {
+                    // var var_1 = row.getElementsByTagName("td");
+                    // var var_2 = var_1[7];
+                    // var var_3 = var_2.innerText;
+                    // var var_4 = var_3.toLowerCase();
+                    var status = row.getElementsByTagName("td")[8].innerText.toLowerCase();
+                    if (status === filter) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                }
+            }
+        }
+        function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toLowerCase();
+            table = document.getElementById("ppwTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td");
+                var found = false;
+
+                for (var j = 0; j < td.length; j++) {
+                    txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</div>

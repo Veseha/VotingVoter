@@ -1,0 +1,325 @@
+<div class="container" th:fragment="contentFragment">
+    <table>
+        <td>
+            <h2> Information about PPW</h2>
+        </td>
+    </table>
+    <br>
+
+    <div class="container text-left">
+        <div class="row">
+            <div class="col-3" id="ppwList">
+                <table>
+                    <td>
+                        <h3> PPW </h3>
+                    </td>
+                    <td class="ms-2 me-2">
+                        <a role="button" id="edit_btn" class=" ms-2 btn btn-primary" hidden="hidden" th:href="@{/qppw/{id}(id=${ppw.Id})}">
+<!--                            Edit PPW-->
+                            <i id="themeIcon_edit_ppw" class="fas fa-tools"></i>
+
+                        </a>
+                    </td>
+                </table>
+
+                <div class="card" >
+                    <div class="card-body">
+                        <h4  th:text="${ppw.name}"></h4>
+                    </div>
+                    <ul class="list-group list-group-flush">
+<!--                        <li class="list-group-item">-->
+                            <li class="list-group-item">
+                                <p class="card-text"> CRQ:
+                                    <a  th:text="${ppw.crq}"></a>
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="card-text"> Planned date:
+                                    <a  th:text="${ppw.planeddate}"></a>
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="card-text"> Work date:
+                                    <a  th:text="${ppw.workdate}"></a>
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="card-text"> City:
+                                    <a  th:text="${ppw.team.city.name}"></a>
+                                </p>
+                            </li>
+<!--                            <li class="list-group-item">-->
+<!--                                <p class="card-text"> Department Name:-->
+<!--                                    <a  th:text="${ppw.team.department.name}"></a>-->
+<!--                                </p>-->
+<!--                            </li>-->
+                            <li class="list-group-item">
+                                <p class="card-text"> Team Name:
+                                    <a  th:text="${ppw.team.name}"></a>
+                                </p>
+                            </li>
+
+                            <li class="list-group-item">
+                                <p class="card-text"> Executors:
+                                    <a  th:text="${ppw.executors_list}"></a>
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="card-text"> Is multitask:
+                                    <a id="check_multitask" th:text="${ppw.multitasks}"></a>
+                                </p>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="card-text"> Status:
+                                    <a id="check_status" th:text="${ppw.status.name}"></a>
+                                </p>
+                            </li>
+<!--                        </li>-->
+                    </ul>
+                </div>
+            </div >
+            <div class="col-3" id="neList">
+                <h3> NE</h3>
+                <div  th:each="ne_ : ${my_ne}" class="card mb-3" >
+                    <div class="card-body">
+                        <h4  th:text="${ne_.nename}"></h4>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <p class="card-text"> NE Type:
+                                <a  th:text="${ne_.netype.name}"></a>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <p class="card-text"> Comment:
+                                <a  th:text="${ne_.netype.comment}"></a>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-3"  hidden="hidden" id="tasksList">
+                <table>
+                    <td class="ms-2 me-2">
+                        <h3> Tasks</h3>
+
+                    </td>
+                    <td class="ms-2 me-2">
+                        <a role="button" id="task_list_btn" class=" ms-2 btn btn-primary" hidden="hidden" th:href="@{/tasklist/{id}(id=${ppw.Id})}">
+<!--                            Task List-->
+                            <i id="themeIcon_list_task" class="fas fa-list-ul"></i>
+                        </a>
+                    </td>
+                    <td class="ms-2 me-2">
+                        <a role="button" id="task_add_btn" class=" ms-2 btn btn-primary" hidden="hidden"  th:href="@{/addtask/{id}(id=${ppw.Id})}">
+<!--                            Add task-->
+                            <i id="themeIcon_add_task" class="fas fa-plus"></i>
+                        </a>
+                    </td>
+                </table>
+                <div  th:each="task : ${tasksList}" class="card mb-3" >
+                    <div class="card-body">
+                        <h4  th:text="${task.name_task}"></h4>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                                <p class="card-text"> Workdate:
+                                    <a  th:text="${task.workdate}"></a>
+                                </p>
+                        </li>
+                        <li class="list-group-item">
+                            <p class="card-text"> CRQ:
+                                <a  th:text="${task.crq}"></a>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                                <p class="card-text"> Executor:
+                                    <a  th:text="${task.executor.name}"></a>
+                                </p>
+                        </li>
+                        <li class="list-group-item">
+                                <p class="card-text"> Status:
+                                    <a  th:text="${task.status.name}"></a>
+                                </p>
+                        </li>
+                        <li class="list-group-item">
+                                <p class="card-text"> NE:
+                                    <a  th:text="${task.ne_.nename}"></a>
+                                </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-5" id="calendarList">
+                <div id="calendar"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>-->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <script  th:inline="javascript">
+        console.log("ok");
+        console.log(document.getElementById('check_multitask').innerText);
+        if(document.getElementById('check_multitask').innerText === 'true'){
+
+            document.getElementById("tasksList").hidden = "";
+
+            document.getElementById("ppwList").className = "col-3";
+            document.getElementById("neList").className = "col-2";
+            document.getElementById("calendarList").className = "col-4";
+
+
+            // document.getElementById("ppwList").classList.add("col")
+            // document.getElementById("neList").classList.remove()
+            // document.getElementById("neList").classList.add("col")
+        }
+
+        if(document.getElementById('check_status').innerText !== 'Completed' && document.getElementById('check_status').innerText !== 'Canceled'){
+            document.getElementById("edit_btn").hidden = "";
+            document.getElementById("task_add_btn").hidden = "";
+            document.getElementById("task_list_btn").hidden = "";
+
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var list_tasks = [];
+            var list_t = [[${tasksList}]];
+            for (let i = 0; i < list_t.length; i++) {
+                list_tasks.push({title: list_t[i].name_task, start: list_t[i].workdate});
+            }
+            list_tasks.push( {
+                title: 'Planned date',
+                start: '[(${ppw.planeddate})]',
+                className: 'bg-success'
+            });
+            list_tasks.push({
+                title: 'Work date',
+                start: '[(${ppw.workdate})]',
+                className: 'bg-danger'
+            });
+            console.log(list_tasks);
+
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                theme: true,
+                themeSystem: 'bootstrap5',
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'dayGridMonth,listMonth'
+                },
+                height: 500,
+                // contentHeight: 290,
+                aspectRatio: 0.25,
+                weekNumbers: true,
+                dayMaxEvents: true,
+                editable: false,
+                navLinks: false,
+                events: list_tasks
+                // events: [
+                //             {
+                //                 title: 'Planed date',
+                //                 start: '[[${ppw.planeddate}]]',
+                //                 // className: 'highlight'
+                //             },
+                //             {
+                //                 title: 'Work date',
+                //                 start: '[[${ppw.workdate}]]',
+                //                 // className: 'highlight'
+                //             },
+                //             list_tasks
+                //         ]
+            });
+            calendar.render();
+        });
+
+        // const element = document.getElementById("calendar");
+        //
+        // var todayDate = moment().startOf("day");
+        // var YM = todayDate.format("YYYY-MM");
+        // var YESTERDAY = todayDate.clone().subtract(1, "day").format("YYYY-MM-DD");
+        // var TODAY = todayDate.format("YYYY-MM-DD");
+        // var TOMORROW = todayDate.clone().add(1, "day").format("YYYY-MM-DD");
+        //
+        // var calendarEl = document.getElementById("calendar");
+        // var calendar = new FullCalendar.Calendar(calendarEl, {
+        //     headerToolbar: {
+        //         left: "prev,next today",
+        //         center: "title",
+        //         right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+        //     },
+        //
+        //     height: 800,
+        //     contentHeight: 780,
+        //     aspectRatio: 3,  // see: https://fullcalendar.io/docs/aspectRatio
+        //
+        //     nowIndicator: true,
+        //     now: TODAY + "T09:25:00", // just for demo
+        //
+        //     views: {
+        //         dayGridMonth: { buttonText: "month" },
+        //         timeGridWeek: { buttonText: "week" },
+        //         timeGridDay: { buttonText: "day" }
+        //     },
+        //
+        //     initialView: "dayGridMonth",
+        //     initialDate: TODAY,
+        //
+        //     editable: true,
+        //     dayMaxEvents: true, // allow "more" link when too many events
+        //     navLinks: true,
+        //     events: [
+        //         ...
+        //     ],
+        //
+        //     eventContent: function (info) {
+        //         var element = $(info.el);
+        //
+        //         if (info.event.extendedProps && info.event.extendedProps.description) {
+        //             if (element.hasClass("fc-day-grid-event")) {
+        //                 element.data("content", info.event.extendedProps.description);
+        //                 element.data("placement", "top");
+        //                 KTApp.initPopover(element);
+        //             } else if (element.hasClass("fc-time-grid-event")) {
+        //                 element.find(".fc-title").append("<div class="fc-description">" + info.event.extendedProps.description + "</div>");
+        //             } else if (element.find(".fc-list-item-title").lenght !== 0) {
+        //                 element.find(".fc-list-item-title").append("<div class="fc-description">" + info.event.extendedProps.description + "</div>");
+        //             }
+        //         }
+        //     }
+        // });
+        //
+        // calendar.render();
+
+
+        // $(document).ready(function () {
+        //     $('#calendar').fullCalendar({
+        //         defaultView: 'month',
+        //         header: {
+        //             left: 'prev,next today',
+        //             center: 'title',
+        //             right: 'month,agendaWeek,agendaDay'
+        //         },
+        //         events: [
+        //             {
+        //                 title: 'Запланировано',
+        //                 start: moment('${ppw.planneddate}').format('YYYY-MM-DD'),
+        //                 className: 'highlight'
+        //             },
+        //             {
+        //                 title: 'Рабочая дата',
+        //                 start: moment('${ppw.workdate}').format('YYYY-MM-DD'),
+        //                 className: 'highlight'
+        //             }
+        //         ]
+        //     });
+        // });
+    </script>
+</div>

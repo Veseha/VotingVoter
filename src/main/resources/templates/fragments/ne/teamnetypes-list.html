@@ -1,0 +1,101 @@
+
+<div class="container" th:fragment="contentFragment">
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="btn-group">
+                <a title="list of NEType-Team" class=" btn btn-success mr-auto active" href="/netype/team/list">
+                    <span class="icon-stack">
+                       <i class="fa fa-user-group icon-stack-3x"></i>
+                       <i class="fa fa-hard-drive icon-stack-1x"></i>
+                    </span>
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="alert alert-dark m-0 px-0"></div>
+                <a title="Add NEType-Team" class=" btn btn-success mr-auto" href="/netype/team/add">
+                    <span class="icon-stack">
+                       <i class="fa fa-user-group icon-stack-3x"></i>
+                       <i class="fa fa-hard-drive icon-stack-1x"></i>
+                    </span>
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+            <div class="btn-group">
+                <a title="NEType list" class=" btn btn-primary mr-auto" href="/netype/list">
+                    <i class="fas fa-hard-drive"></i>
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="alert alert-dark m-0 px-0"></div>
+                <a title="NEType team" class=" btn btn-primary mr-auto " href="/netype/add">
+                    <i class="fas fa-hard-drive"></i>
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+            <div class="btn-group">
+                <a title="list of Teams" class=" btn btn-primary mr-auto" href="/team/list">
+                    <i class="fas fa-user-group"></i>
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="alert alert-dark m-0 px-0"></div>
+                <a title="Add team" class=" btn btn-primary mr-auto" href="/team/add">
+                    <i class="fas fa-user-group"></i>
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+
+
+            <div class="btn-group">
+                <a title="list of NE" class=" btn btn-primary mr-auto" href="/ne/list">
+                    <i class="fas fa-server"></i>
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="alert alert-dark m-0 px-0"></div>
+                <a title="Add NE" class=" btn btn-primary mr-auto" href="/ne/add">
+                    <i class="fas fa-server"></i>
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h2>TeamNETypes List</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>TeamNETypes ID</th>
+            <th>Team</th>
+            <th>NEtype</th>
+            <th>Comment</th>
+            <th></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Loop through the employeeList and display each employee -->
+        <tr th:each="tnet : ${teamnetypesList}">
+            <td th:text="${tnet.Id}"></td>
+            <td th:text="${tnet.team.name}"></td>
+            <td th:text="${tnet.neType.name}"></td>
+            <td th:text="${tnet.comm}"></td>
+            <td>
+                <button class="btn btn-primary btn-sm" onclick="edit_page_redirect(this)" th:data-id="${tnet.Id}"  title="Edit teamnetypes">
+                    <i id="themeIcon_2" class="fas fa-tools"></i>
+                </button>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <script>
+        function edit_page_redirect(button){
+            if (!button.disabled) {
+                var id = button.getAttribute('data-id');
+                window.location.href = '/netype/team/edit/' + id;
+
+            }
+        }
+    </script>
+</div>

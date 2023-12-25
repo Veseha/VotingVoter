@@ -1,0 +1,18 @@
+<div class="container" th:fragment="contentFragment">
+
+  <div class="row">
+    <div class="col-md-6">
+      <h2>PPW History</h2>
+      <div class="list-group">
+        <a th:each="ppw : ${ppwList}" th:href="@{/history/{id}(id=${ppw.id})}"
+           class="list-group-item list-group-item-action" th:text="${ppw.name}"></a>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="list-group">
+        <h2>Tasks History</h2>
+        <a th:each="task : ${taskList}" th:href="@{/history_task/{id}(id=${task.id_task})}"
+           class="list-group-item list-group-item-action" th:text="@{{ppw_name} - {task_name}(task_name=${task.name_task}, ppw_name=${task.ppw.name})}"></a>
+      </div>
+  </div>
+</div>

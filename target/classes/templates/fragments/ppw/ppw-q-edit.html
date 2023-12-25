@@ -1,0 +1,290 @@
+
+<div class="container" th:fragment="contentFragment">
+    <h2 th:text="${ppw.name}"></h2>
+
+    <form action="#" th:action="@{/qppw/{id}(id=${ppw.id})}" th:object="${ppw}" method="post">
+
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select class="form-control" id="status" name="status.id_status" onchange="handleDropdownChange()" required>
+                <option th:each="status_l : ${statusList}" th:value="${status_l.id_status}" th:text="${status_l.name}" th:selected="${ppw.status.isSelected(status_l)}" th:hidden="${ppw.status.isSelected(status_l)}":></option>
+            </select>
+        </div>
+
+        <div class="form-group" id="planeddate_field" style="display: none;">
+            <label for="planeddate">Planned Date:</label>
+            <input type="date" class="form-control" id="planeddate" name="planeddate" th:value="*{planeddate}"  required>
+        </div>
+
+        <div class="form-group" id="workdate_field" style="display: none;">
+            <label for="workdate">Work Date:</label>
+            <input type="date" class="form-control" id="workdate" name="workdate" th:value="*{workdate}" required>
+        </div>
+
+        <div class="form-group" id="crq_field" style="display: none;">
+            <label for="crq">CRQ:</label>
+            <input type="number" class="form-control" id="crq" name="crq" th:field="*{crq}" required>
+        </div>
+
+        <div class="form-group" id="comments_field" style="display: none;">
+            <label for="comments">Comment:</label>
+            <input type="text" class="form-control" id="comments" name="comments"  required>
+        </div>
+
+        <div class="form-group" id="executors_field" style="display: none;">
+            <label>Executors:</label>
+
+            <div id="fieldsContainer">
+            </div>
+
+            <div class="field row g-3 align-items-center">
+                <div class="col-auto">
+                    <button class="btn btn-success" type="button" onclick="addField()">Add Executor</button>
+                </div>
+
+                <div class="col-auto">
+                    <select class="form-select" id="selecting-ex"></select>
+                </div>
+            </div>
+        </div>
+
+
+
+<!--        <button type="submit" class="btn btn-primary">Update</button>-->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+        <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Please confirm</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        When the status is changed to "assigned", you will not be able to change status to "planned".\n
+                        When the status is changed to "cancelled", you will not be able to change task anymore.\n
+                        Once the status is changed to "completed", you will not be able to change the task anymore and a completion message will be sent to the entire team.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </form>
+    <script th:inline="javascript">
+        var counter = 0;
+        var employeesList = /*[[${employeesList}]]*/ [];
+        var employeesList_back = /*[[${employeesList}]]*/ [];
+        var executorsList = /*[[${executors}]]*/ [];
+
+
+        // console.log(employeesList);
+        for(var i = 0; i < executorsList.length; i++){
+            addField(executorsList[i].employee.id, executorsList[i].employee.name, executorsList[i].comm);
+            for (var j = 0; j < employeesList.length; j++) {
+                console.log(employeesList[j].id, executorsList[i].employee.id);
+                if(employeesList[j].id === executorsList[i].employee.id){
+                    // console.log("check");
+                    employeesList.splice(j, 1);
+                }
+            }
+        }
+        // console.log(employeesList);
+
+        refreshdd();
+        handleDropdownChange();
+
+        function refreshdd(){
+            // console.log(employeesList);
+            var dropdown = document.getElementById('selecting-ex');
+            dropdown.className = 'form-select';
+            removeOptions(dropdown);
+
+            for (var i = 0; i < employeesList.length; i++) {
+                var option = document.createElement('option');
+                option.value = employeesList[i].id;
+                option.text = employeesList[i].name;
+                dropdown.appendChild(option);
+            }
+        }
+
+        function removeOptions(selectElement) {
+            var i, L = selectElement.options.length - 1;
+            for(i = L; i >= 0; i--) {
+                selectElement.remove(i);
+            }
+        }
+
+        function addField(id_exec = -1, name_exec = -1, comment_exec = "") {
+            counter++;
+
+
+            var container = document.getElementById('fieldsContainer');
+            var field = document.createElement('div');
+            field.className = 'field row g-3 align-items-center';
+
+            var div_dd = document.createElement('div');
+            div_dd.className = 'col-auto';
+            var div_input = document.createElement('div');
+            div_input.className = 'col-auto';
+
+            var dropdown = document.createElement('select');
+            dropdown.className = 'form-control';
+            dropdown.name = 'field';
+
+            var comment = document.createElement('input');
+            comment.className = 'form-control';
+            comment.type = 'text';
+            comment.name = 'comment';
+
+
+            var option = document.createElement('option');
+            if(id_exec !== -1){
+                option.value = id_exec;
+                option.text = name_exec;
+                comment.value = comment_exec;
+                // option.id = 'currunt_choose';
+
+            }
+            else{
+                var e = document.getElementById("selecting-ex");
+                option.value = e.options[e.selectedIndex].value;
+                option.text = e.options[e.selectedIndex].text;
+                comment.value = 'Executor';
+            }
+            dropdown.appendChild(option);
+
+
+
+            var removeButton = document.createElement('button');
+            removeButton.className = 'btn btn-outline-secondary col-auto';
+            removeButton.type = 'button';
+            removeButton.innerHTML = 'Delete';
+            removeButton.onclick = function() {
+                removeField(this);
+            };
+
+            div_dd.appendChild(dropdown);
+            field.appendChild(div_dd);
+
+            div_input.appendChild(comment);
+            field.appendChild(div_input);
+
+            field.appendChild(removeButton);
+
+            container.insertBefore(field, container.firstChild);
+
+            for (var j = 0; j < employeesList.length; j++) {
+                console.log(employeesList[j].id + " " + option.value);
+                if(employeesList[j].id.toString() === option.value.toString()){
+                    employeesList.splice(j, 1);
+                    // console.log("splice " + j);
+                    // console.log(employeesList);
+                }
+            }
+
+            refreshdd();
+        }
+
+        function removeField(button) {
+            var field = button.parentNode;
+            field.parentNode.removeChild(field);
+            for (var i = 0; i < employeesList_back.length; i++) {
+                if(employeesList_back[i].id.toString() === field.children[0].children[0].children[0].value.toString()){
+                    employeesList.push(employeesList_back[i]);
+                    break;
+                }
+            }
+            refreshdd();
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function handleDropdownChange() {
+            var dropdown = document.getElementById("status");
+            var selectedValue = dropdown.value;
+
+            var planeddate = document.getElementById("planeddate_field");
+            var workdate = document.getElementById("workdate_field");
+            var crq = document.getElementById("crq_field");
+            var comments = document.getElementById("comments_field");
+            var executors = document.getElementById("executors_field");
+
+            var planeddate_ = document.getElementById("planeddate");
+            var workdate_ = document.getElementById("workdate");
+            var crq_ = document.getElementById("crq");
+            var comments_ = document.getElementById("comments");
+
+            // Показать/скрыть поля в зависимости от выбранного значения в dropdown
+            console.log(selectedValue);
+            switch (selectedValue) {
+                case "1":
+                    planeddate.style.display = "block";
+                    workdate.style.display = "none";
+                    crq.style.display = "none";
+                    comments.style.display = "block";
+                    executors.style.display = "none";
+                    planeddate_.required = true;
+                    workdate_.required = false;
+                    crq_.required = false;
+                    comments_.required = true;
+                    break;
+                case "2":
+                    planeddate.style.display = "none";
+                    workdate.style.display = "block";
+                    crq.style.display = "block";
+                    comments.style.display = "block";
+                    executors.style.display = "block";
+                    planeddate_.required = false;
+                    workdate_.required = true;
+                    crq_.required = true;
+                    comments_.required = false;
+                    break;
+                case "3":
+                    planeddate.style.display = "none";
+                    workdate.style.display = "none";
+                    crq.style.display = "none";
+                    comments.style.display = "block";
+                    executors.style.display = "none";
+                    planeddate_.required = false;
+                    workdate_.required = false;
+                    crq_.required = false;
+                    comments_.required = false;
+                    break;
+                case "4":
+                    planeddate.style.display = "none";
+                    workdate.style.display = "none";
+                    crq.style.display = "none";
+                    comments.style.display = "block";
+                    executors.style.display = "none";
+                    planeddate_.required = false;
+                    workdate_.required = false;
+                    crq_.required = false;
+                    comments_.required = true;
+                    break;
+                default:
+                    planeddate.style.display = "none";
+                    workdate.style.display = "none";
+                    crq.style.display = "none";
+                    comments.style.display = "none";
+                    executors.style.display = "none";
+
+                    planeddate_.required = false;
+                    workdate_.required = false;
+                    crq_.required = false;
+                    comments_.required = false;
+                    break;
+            }
+        }
+    </script>
+
+</div>

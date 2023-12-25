@@ -1,0 +1,168 @@
+
+<div class="container" th:fragment="contentFragment">
+
+    <div class="row mb-3">
+        <div class="col">
+
+            <div class="btn-group">
+                <a title="list of Access" class=" btn btn-success mr-auto active" href="/access/list">
+                    <i class="fas fa-shield-halved"></i>
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="alert alert-dark m-0 px-0"></div>
+                <a title="Add Access" class=" btn btn-success mr-auto" href="/access/add">
+                    <i class="fas fa-shield-halved"></i>
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+            <div class="btn-group">
+                <a title="Team list" class=" btn btn-primary mr-auto " href="/team/list">
+                    <i class="fas fa-user-group"></i>
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="alert alert-dark m-0 px-0"></div>
+                <a title="Add team" class=" btn btn-primary mr-auto " href="/team/add">
+                    <i class="fas fa-user-group"></i>
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+
+            <div class="btn-group">
+                <a title="list of User" class=" btn btn-primary mr-auto" href="/employee/list">
+                    <i class="fas fa-user"></i>
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="alert alert-dark m-0 px-0"></div>
+                <a title="Add employee" class=" btn btn-primary mr-auto" href="/employee/add">
+                    <i class="fas fa-user"></i>
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <h2>My and my children Access List</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Model</th>
+            <th>PrivLVL</th>
+            <th>InfluenceLVL</th>
+            <th>Read</th>
+            <th>Create</th>
+            <th>Assigned</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Close</th>
+<!--            <th></th>-->
+            <th></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="access : ${accessMyList}">
+            <td th:text="${access.id}"></td>
+            <td th:text="${access.model}"></td>
+            <td th:text="${access.privlvl.getLevel()}"></td>
+            <td>
+                <span th:if="${access.influencelvl != null}" th:text="${access.influencelvl.getLevel()}"></span>
+                <span th:unless="${access.influencelvl != null}"></span>
+            </td>
+
+            <td>
+                <span th:if="${access.read_ == true}"><i class="fa-solid fa-circle"></i></span>
+                <span th:unless="${access.read_ == true}"><i class="fa-solid fa-xmark"></i></span>
+            </td>
+            <td>
+                <span th:if="${access.create_ == true}"><i class="fa-solid fa-circle"></i></span>
+                <span th:unless="${access.create_ == true}"><i class="fa-solid fa-xmark"></i></span>
+            </td>
+            <td>
+                <span th:if="${access.assigned_ == true}"><i class="fa-solid fa-circle"></i></span>
+                <span th:unless="${access.assigned_ == true}"><i class="fa-solid fa-xmark"></i></span>
+            </td>
+            <td>
+                <span th:if="${access.edit_ == true}"><i class="fa-solid fa-circle"></i></span>
+                <span th:unless="${access.edit_ == true}"><i class="fa-solid fa-xmark"></i></span>
+            </td>
+            <td>
+                <span th:if="${access.delete_ == true}"><i class="fa-solid fa-circle"></i></span>
+                <span th:unless="${access.delete_ == true}"><i class="fa-solid fa-xmark"></i></span>
+            </td>
+            <td>
+                <span th:if="${access.close_ == true}"><i class="fa-solid fa-circle"></i></span>
+                <span th:unless="${access.close_ == true}"><i class="fa-solid fa-xmark"></i></span>
+            </td>
+<!--            <td>-->
+<!--                <span th:if="${access.read_ == true}"><i class="fa-solid fa-circle"></i></span>-->
+<!--                <span th:unless="${access.read_ == true}"><i class="fa-solid fa-xmark"></i></span>-->
+<!--            </td>-->
+<!--            <td th:text="${access.read_}"></td>-->
+<!--            <td th:text="${access.create_}"></td>-->
+<!--            <td th:text="${access.assigned_}"></td>-->
+<!--            <td th:text="${access.edit_}"></td>-->
+<!--            <td th:text="${access.delete_}"></td>-->
+<!--            <td th:text="${access.close_}"></td>-->
+<!--            <td th:text="${access}"></td>-->
+            <td>
+                <button class="btn btn-primary btn-sm" onclick="edit_page_redirect(this)" th:if="${access.editforuser == true }"  th:data-id="${access.id}"  title="Edit Access">
+                    <i id="themeIcon_" class="fas fa-tools"></i>
+                </button>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+<!--    <h2>Access List (who can manipulate with my level and my children)</h2>-->
+<!--    <table class="table">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <th>Model</th>-->
+<!--            <th>PrivLVL</th>-->
+<!--            <th>InfluenceLVL</th>-->
+<!--            <th>Read</th>-->
+<!--            <th>Create</th>-->
+<!--            <th>Assigned</th>-->
+<!--            <th>Edit</th>-->
+<!--            <th>Delete</th>-->
+<!--            <th>Close</th>-->
+
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="access : ${accessMeList}">-->
+<!--            <td th:text="${access.id}"></td>-->
+<!--            <td th:text="${access.model}"></td>-->
+<!--            <td th:text="${access.privlvl.getLevel()}"></td>-->
+<!--            <td th:text="${access.influencelvl.getLevel()}"></td>-->
+<!--            <td th:text="${access.read_}"></td>-->
+<!--            <td th:text="${access.create_}"></td>-->
+<!--            <td th:text="${access.assigned_}"></td>-->
+<!--            <td th:text="${access.edit_}"></td>-->
+<!--            <td th:text="${access.delete_}"></td>-->
+<!--            <td th:text="${access.close_}"></td>-->
+<!--            <td>-->
+<!--                <button class="btn btn-primary btn-sm" onclick="edit_page_redirect(this)" th:data-id="${access.id}"  title="Edit Access">-->
+<!--                    <i id="themeIcon_2" class="fas fa-tools"></i>-->
+<!--                </button>-->
+<!--            </td>-->
+
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+    <a class="navbar-brand" title="My PPWs" href="/access/help">
+        Help
+    </a>
+    <script>
+        function edit_page_redirect(button){
+            if (!button.disabled) {
+                var id = button.getAttribute('data-id');
+                window.location.href = '/access/edit/' + id;
+            }
+        }
+    </script>
+</div>

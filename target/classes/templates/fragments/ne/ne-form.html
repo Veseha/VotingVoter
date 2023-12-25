@@ -1,0 +1,93 @@
+<div class="container" th:fragment="contentFragment">
+  <div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <div class="btn-group">
+          <a title="list of NE" class=" btn btn-success mr-auto" href="/ne/list">
+            <i class="fas fa-server"></i>
+            <i class="fas fa-bars"></i>
+          </a>
+          <div class="alert alert-dark m-0 px-0"></div>
+          <a title="Add NE" class=" btn btn-success mr-auto active " href="/ne/add">
+            <i class="fas fa-server"></i>
+            <i class="fas fa-plus"></i>
+          </a>
+        </div>
+
+
+        <div class="btn-group">
+          <a title="list of NEType-Team" class=" btn btn-primary mr-auto" href="/netype/team/list">
+                    <span class="icon-stack">
+                       <i class="fa fa-user-group icon-stack-3x"></i>
+                       <i class="fa fa-hard-drive icon-stack-1x"></i>
+                    </span>
+            <i class="fas fa-bars"></i>
+          </a>
+          <div class="alert alert-dark m-0 px-0"></div>
+          <a title="Add NEType-Team" class=" btn btn-primary mr-auto" href="/netype/team/add">
+                    <span class="icon-stack">
+                       <i class="fa fa-user-group icon-stack-3x"></i>
+                       <i class="fa fa-hard-drive icon-stack-1x"></i>
+                    </span>
+            <i class="fas fa-plus"></i>
+          </a>
+        </div>
+
+        <div class="btn-group">
+          <a title="NEType list" class=" btn btn-primary mr-auto" href="/netype/list">
+            <i class="fas fa-hard-drive"></i>
+            <i class="fas fa-bars"></i>
+          </a>
+          <div class="alert alert-dark m-0 px-0"></div>
+          <a title="NEType team" class=" btn btn-primary mr-auto " href="/netype/add">
+            <i class="fas fa-hard-drive"></i>
+            <i class="fas fa-plus"></i>
+          </a>
+        </div>
+
+        <div class="btn-group">
+          <a title="list of Teams" class=" btn btn-primary mr-auto" href="/team/list">
+            <i class="fas fa-user-group"></i>
+            <i class="fas fa-bars"></i>
+          </a>
+          <div class="alert alert-dark m-0 px-0"></div>
+          <a title="Add team" class=" btn btn-primary mr-auto" href="/team/add">
+            <i class="fas fa-user-group"></i>
+            <i class="fas fa-plus"></i>
+          </a>
+        </div>
+    </div>
+    </div>
+
+    <h2>NE Form</h2>
+    <form action="/ne/add" method="post">
+      <div class="form-group">
+        <label for="nename">NE:</label>
+        <input type="text" class="form-control" id="nename" name="nename" required>
+      </div>
+      <div class="form-group">
+        <label for="city">City:</label>
+        <select class="form-control" id="city" name="city.id" required>
+          <option th:each="city : ${cityList}" th:value="${city.id}" th:text="${city.name}"></option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="netype">NEType:</label>
+        <select class="form-control" id="netype" name="netype.id_netype" required>
+          <option th:each="netype : ${netypeList}" th:value="${netype.id_netype}" th:text="${netype.name}"></option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+
+    </form>
+  </div>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+
+</div>

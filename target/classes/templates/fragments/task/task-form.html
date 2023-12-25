@@ -1,0 +1,90 @@
+<div class="container" th:fragment="contentFragment">
+    <h2>Task Form</h2>
+    <form action="/addtask" method="post">
+        <div class="form-group">
+            <label for="name_task">Name:</label>
+            <input type="text" class="form-control" id="name_task" name="name_task" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ppw">PPW:</label>
+            <select class="form-control" id="ppw" name="ppw.id" required>
+                <option th:each="ppw : ${ppwList}" th:value="${ppw.id}" th:text="${ppw.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ne">NE:</label>
+          <select class="form-control" id="ne" name="ne_.id_ne" required>
+            <option th:each="ne_ : ${neList}" th:value="${ne_.id_ne}" th:text="${ne_.nename}"></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+            <label for="workdate">Work Date:</label>
+            <input type="date" class="form-control" id="workdate" name="workdate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="crq">CRQ:</label>
+            <input type="number" class="form-control" id="crq" name="crq" required>
+        </div>
+
+        <div class="form-group">
+            <label for="executor">Executor:</label>
+            <select class="form-control" id="executor" name="executor.id" required>
+                <option th:each="executor : ${executorList}" th:value="${executor.id}" th:text="${executor.employee.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select class="form-control" id="status" name="status.id_status" required>
+                <option th:each="status : ${statusList}" th:value="${status.id_status}" th:text="${status.name}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" onclick="selectAll();">Save</button>
+        <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+
+    </form>
+    <script th:inline="javascript">
+        function goBack() {
+            window.history.back();
+        }
+        // var counter = 0;
+        // var employeesList = /*[[${employeesList}]]*/ [];
+        // var employeesList_back = /*[[${employeesList}]]*/ [];
+        // var neList = /*[[${my_ne}]]*/ []
+        // var executorsList = [];
+        //
+        // var select_ne = document.getElementById('availableNEs');
+        // var optionsToDelete = neList.map(function(ne) {
+        //     return ne.id_ne.toString();
+        // });
+        //
+        // for (let i = select_ne.options.length - 1; i >= 0; i--) {
+        //     if (optionsToDelete.includes(select_ne.options[i].value)) {
+        //         select_ne.remove(i);
+        //     }
+        // }
+
+        // // console.log(employeesList);
+        // for(var i = 0; i < executorsList.length; i++){
+        //   addField(executorsList[i].employee.id, executorsList[i].employee.name, executorsList[i].comm);
+        //   for (var j = 0; j < employeesList.length; j++) {
+        //     console.log(employeesList[j].id, executorsList[i].employee.id);
+        //     if(employeesList[j].id === executorsList[i].employee.id){
+        //       // console.log("check");
+        //       employeesList.splice(j, 1);
+        //     }
+        //   }
+        // }
+        // // console.log(employeesList);
+        //
+        // refreshdd();
+
+    </script>
+    <script src="scripts.js"></script>
+
+</div>

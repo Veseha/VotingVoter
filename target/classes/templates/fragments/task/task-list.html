@@ -1,0 +1,68 @@
+<div class="container" th:fragment="contentFragment">
+    <div class="card-header" >
+        <h2>List of Tasks
+<!--            <a role="button" class=" ms-2 btn btn-primary btn-sm list-group-item list-group-item-action"  th:href="@{/addtask/{id}(id=${task.value[0].ppw.Id})}">-->
+<!--                <i id="themeIcon_add" class="fas fa-plus"></i>-->
+<!--                <span></span>-->
+<!--            </a>-->
+        </h2>
+    </div>
+    <br>
+    <div class="container text-left">
+        <div class="card mb-3" style="width: 28rem;">
+            <div class="card-header" >
+                <div class="row">
+                    <div class="col">
+                        <h5 th:text=" ${ppw.name}"></h5>
+                    </div>
+
+                    <div class=" col-2  me-3">
+                        <a role="button" class=" ms-2 btn btn-primary btn-lg list-group-item list-group-item-action start-50"  th:href="@{/addtask/{id}(id=${ppw.Id})}">
+                            <i id="themeIcon_add_ppw" class="fas fa-plus"></i>
+<!--                            <span></span>-->
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush" th:each="task: ${taskList}">
+                <a role="button" class="btn list-group-item list-group-item-action"  th:href="@{/edittask/{id}(id=${task.id_task})}">
+                    <label  th:text="${task.name_task}"></label>
+                    <span class="badge  rounded-pill position-absolute top-50 end-0 me-2 translate-middle-y" th:text="${task.status.name}"></span>
+                </a>
+            </ul>
+            <span class="position-absolute top-0 start-100  translate-middle badge rounded-pill " th:text="${ppw.status.name}">
+            </span>
+        </div>
+    </div>
+    <script>
+        console.log('test1');
+        document.addEventListener('DOMContentLoaded', function(){
+            console.log('test2');
+            var rows = document.getElementsByClassName("badge");
+            console.log(rows);
+            for (var i = 0; i < rows.length; i++) {
+                var status = rows[i].innerText;
+                var className = "";
+                console.log(status);
+                switch (status) {
+                    case "Planned":
+                        className = "bg-warning";
+                        break;
+                    case "Assigned":
+                        className = "bg-danger";
+                        break;
+                    case "Completed":
+                        className = "bg-success";
+                        break;
+                    case "Canceled":
+                        className = "bg-secondary";
+                        break;
+                    default:
+                        break;
+                }
+
+                rows[i].classList.add(className);
+            }
+        });
+    </script>
+</div>

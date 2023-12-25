@@ -1,0 +1,74 @@
+<div class="container" th:fragment="contentFragment">
+    <div>
+        <h2>NE Form Post</h2>
+        <form action="/ne/add" method="post">
+            <div class="form-group">
+                <label for="nename">NE:</label>
+                <input type="text" class="form-control" id="nename" name="nename" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <select class="form-control" id="city" name="city.id" required>
+                    <option th:each="city : ${cityList}" th:value="${city.id}" th:text="${city.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="netype">NEType:</label>
+                <select class="form-control" id="netype" name="netype.id_netype" required>
+                    <option th:each="netype : ${netypeList}" th:value="${netype.id_netype}" th:text="${netype.name}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+
+        </form>
+
+        <h2>NE Form Put</h2>
+        <form action="/ne/add" method="">
+            <div class="form-group">
+                <label for="nename">NE:</label>
+                <input type="text" class="form-control" id="nename" name="nename" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <select class="form-control" id="city" name="city.id" required>
+                    <option th:each="city : ${cityList}" th:value="${city.id}" th:text="${city.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="netype">NEType:</label>
+                <select class="form-control" id="netype" name="netype.id_netype" required>
+                    <option th:each="netype : ${netypeList}" th:value="${netype.id_netype}" th:text="${netype.name}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+
+        </form>
+
+
+        <h2>NE Form</h2>
+        <form action="/ne/add" method="post">
+            <div class="form-group">
+                <label for="nename">NE:</label>
+                <input type="text" class="form-control" id="nename" name="nename" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <select class="form-control" id="city" name="city.id" required>
+                    <option th:each="city : ${cityList}" th:value="${city.id}" th:text="${city.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="netype">NEType:</label>
+                <select class="form-control" id="netype" name="netype.id_netype" required>
+                    <option th:each="netype : ${netypeList}" th:value="${netype.id_netype}" th:text="${netype.name}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+
+        </form>
+    </div>
+
+</div>

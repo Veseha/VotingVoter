@@ -1,0 +1,133 @@
+<div class="container" th:fragment="contentFragment">
+    <h2>PPW Form</h2>
+    <form action="/createppw" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="team">Team:</label>
+            <select class="form-control" id="team" name="team.id" required>
+                <option th:each="team : ${teamList}" th:value="${team.id}" th:text="${team.name}"></option>
+            </select>
+        </div>
+
+        <!--    <div class="form-group">-->
+        <!--      <label for="ne">NE:</label>-->
+        <!--      <select class="form-control" id="ne" name="ne_.id_ne" required>-->
+        <!--        <option th:each="ne_ : ${neList}" th:value="${ne_.id_ne}" th:text="${ne_.nename}"></option>-->
+        <!--      </select>-->
+        <!--    </div>-->
+        <div class="form-group">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-2">
+                        <h6>Selected NE</h6>
+                        <select id="selectedNEs" class="form-select" multiple="multiple" name="ne_"  size="5">
+                            <option th:each="ne_ : ${my_ne}" th:value="${ne_.id_ne}" th:text="${ne_.nename}"></option>
+                        </select>
+                    </div>
+                    <div class="col-1 align-self-center">
+                        <div class="text-center">
+                            <div class="row g-2">
+                                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+
+                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                            onclick="moveSelectedNEs('selectedNEs', 'availableNEs')">></button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                            onclick="moveSelectedNEs('availableNEs', 'selectedNEs')"><</button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                            onclick="moveAllNEs('selectedNEs', 'availableNEs')">>></button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                            onclick="moveAllNEs('availableNEs', 'selectedNEs')"><<</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <h6>Available NE</h6>
+                        <select id="availableNEs" class="form-select" multiple="multiple" size="5">
+                            <option th:each="ne_ : ${all_ne}" th:value="${ne_.id_ne}" th:text="${ne_.nename}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="planeddate">Planned Date:</label>
+            <input type="date" class="form-control" id="planeddate" name="planeddate" required>
+        </div>
+        <div class="form-group">
+            <label for="workdate">Work Date:</label>
+            <input type="date" class="form-control" id="workdate" name="workdate">
+        </div>
+        <div class="form-group">
+            <label for="crq">CRQ:</label>
+            <input type="text" class="form-control" id="crq" name="crq">
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select class="form-control" id="status" name="status.id_status" required>
+                <option th:each="status : ${statusList}" th:value="${status.id_status}" th:text="${status.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Executors:</label>
+
+            <div id="fieldsContainer">
+            </div>
+
+            <div class="field row g-3 align-items-center">
+                <div class="col-auto">
+                    <button class="btn btn-success" type="button" onclick="addField()">Add Executor</button>
+                </div>
+
+                <div class="col-auto">
+                    <select class="form-select" id="selecting-ex"></select>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" onclick="selectAll();">Save</button>
+        <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+
+    </form>
+    <script th:inline="javascript">
+        var counter = 0;
+        var employeesList = /*[[${employeesList}]]*/ [];
+        var employeesList_back = /*[[${employeesList}]]*/ [];
+        var neList = /*[[${my_ne}]]*/ []
+        var executorsList = [];
+
+        var select_ne = document.getElementById('availableNEs');
+        var optionsToDelete = neList.map(function(ne) {
+            return ne.id_ne.toString();
+        });
+
+        for (let i = select_ne.options.length - 1; i >= 0; i--) {
+            if (optionsToDelete.includes(select_ne.options[i].value)) {
+                select_ne.remove(i);
+            }
+        }
+
+        // console.log(employeesList);
+        for(var i = 0; i < executorsList.length; i++){
+            addField(executorsList[i].employee.id, executorsList[i].employee.name, executorsList[i].comm);
+            for (var j = 0; j < employeesList.length; j++) {
+                console.log(employeesList[j].id, executorsList[i].employee.id);
+                if(employeesList[j].id === executorsList[i].employee.id){
+                    // console.log("check");
+                    employeesList.splice(j, 1);
+                }
+            }
+        }
+        // console.log(employeesList);
+
+        refreshdd();
+    </script>
+    <script src="scripts.js"></script>
+
+</div>
