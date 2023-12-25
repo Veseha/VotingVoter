@@ -17,7 +17,7 @@ import java.util.Collection;
 @Entity
 @Data
 @Audited
-@Table(name="User")
+@Table(name="Users")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User  {

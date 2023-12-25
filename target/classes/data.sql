@@ -1,19 +1,19 @@
-INSERT INTO Messages (stage, active, message) values ('boss_notify', true, 'У одной из ваших команд были запланированы %s планово-профилактические работы "%s" срок которых уже истек. <br> Заведите CRQ на проведение этих работ и укажите его номер в системе BeeTasks или продлите срок исполнения'); --1
-INSERT INTO Messages (stage, active, message) values ('planned', true, 'У Вас запланированы %s планово-профилактические работы "%s". <br> Заведите CRQ на проведение этих работ и укажите его номер в системе BeeTasks'); --2
-INSERT INTO Messages (stage, active, message) values ('planned_out', true, 'У Вас были запланированы %s планово-профилактические работы "%s" срок которых уже истек. <br> Заведите CRQ на проведение этих работ и укажите его номер в системе BeeTasks или продлите срок исполнения'); --3
-INSERT INTO Messages (stage, active, message) values ('assigned', true, 'У Вас будут %s планово-профилактические работы "%s". <br> После выполнения работы, закройте CRQ и отметьте её в системе BeeTasks что она выполнена.'); --4
-INSERT INTO Messages (stage, active, message) values ('assigned_out', true, 'У Вас %s были планово-профилактические работы "%s". <br> Напоминаем о том, что необходимо закрыть CRQ и отметьте её в системе BeeTasks как выполненная.'); --5
+INSERT INTO Messages (stage, active, message) values ('boss_notify', true, 'У одной из ваших команд были запланированы %s планово-профилактические работы "%s" срок которых уже истек. <br> Заведите CRQ на проведение этих работ и укажите его номер в системе VotingVoter или продлите срок исполнения'); --1
+INSERT INTO Messages (stage, active, message) values ('planned', true, 'У Вас запланированы %s планово-профилактические работы "%s". <br> Заведите CRQ на проведение этих работ и укажите его номер в системе VotingVoter'); --2
+INSERT INTO Messages (stage, active, message) values ('planned_out', true, 'У Вас были запланированы %s планово-профилактические работы "%s" срок которых уже истек. <br> Заведите CRQ на проведение этих работ и укажите его номер в системе VotingVoter или продлите срок исполнения'); --3
+INSERT INTO Messages (stage, active, message) values ('assigned', true, 'У Вас будут %s планово-профилактические работы "%s". <br> После выполнения работы, закройте CRQ и отметьте её в системе VotingVoter что она выполнена.'); --4
+INSERT INTO Messages (stage, active, message) values ('assigned_out', true, 'У Вас %s были планово-профилактические работы "%s". <br> Напоминаем о том, что необходимо закрыть CRQ и отметьте её в системе VotingVoter как выполненная.'); --5
 INSERT INTO Messages (stage, active, message) values ('error', true, 'В работе %s %s обнаружена ошибка'); --6
 INSERT INTO Messages (stage, active, message) values ('completed', true, 'Планово-профилактические работы %s %s были завершены.'); -- 7
 INSERT INTO Messages (stage, active, message) values ('sub_info', true, 'Уведомление по работе %s'); --8
 INSERT INTO Messages (stage, active, message) values ('sub_error', true, 'Ошибка по работе %s'); --9
-INSERT INTO Messages (stage, active, message) values ('task', true, 'У Вас будут %s таск "%s". <br> После выполнения таска отметьте его в системе BeeTasks что он выполнен.'); --10
-INSERT INTO Messages (stage, active, message) values ('task_out', true, 'У Вас %s был таск "%s". <br> Напоминаем о том, что необходимо его выполнить и отметьте его в системе BeeTasks как выполненный.'); --11
+INSERT INTO Messages (stage, active, message) values ('task', true, 'У Вас будут %s таск "%s". <br> После выполнения таска отметьте его в системе VotingVoter что он выполнен.'); --10
+INSERT INTO Messages (stage, active, message) values ('task_out', true, 'У Вас %s был таск "%s". <br> Напоминаем о том, что необходимо его выполнить и отметьте его в системе VotingVoter как выполненный.'); --11
 INSERT INTO Messages (stage, active, message) values ('task_error', true, 'В таске %s %s обнаружена ошибка, был установлен статус Assigned и не был установлен исполнитель. <br> Назначьте исполнителя'); --12
 INSERT INTO Messages (stage, active, message) values ('test', true, '%s ||| %s'); --13
 INSERT INTO Messages (stage, active, message) values ('team_lead_notify', true, 'Заведите работы на следующий год'); --14
-INSERT INTO Messages (stage, active, message) values ('new_employee', true, 'Вы были успешно добавлены как новый сотрудник в систему по контролю за выполнением работ BeeTasks.'); --15
-INSERT INTO Messages (stage, active, message) values ('delete_employee', true, 'Вы были удалены из системы BeeTasks и больше не имеете доступа к системе'); --16
+INSERT INTO Messages (stage, active, message) values ('new_employee', true, 'Вы были успешно добавлены как новый сотрудник в систему по контролю за выполнением работ VotingVoter.'); --15
+INSERT INTO Messages (stage, active, message) values ('delete_employee', true, 'Вы были удалены из системы VotingVoter и больше не имеете доступа к системе'); --16
 
 
 INSERT INTO Subject (stage, active, subject) VALUES ( 'new_employee', true, 'Новый сотрудник'); --1
