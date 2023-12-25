@@ -17,7 +17,7 @@ public interface UserRep extends JpaRepository<User, Long> {
 //    public User findByPrivilegesAndTeam(Privileges privileges, Team team);
     @Modifying
     @Query(value = "UPDATE User u set u.firstName =:firstName,"+
-            " u.lastName =:lastName," + "u.email =:email where u.id =:id")
+            " u.lastName =:lastName," + "u.email =:email where u.userId =:id")
     void update(String firstName, String lastName, String email, Long id);
 
     public List<User> findByEmailIsNotNull();

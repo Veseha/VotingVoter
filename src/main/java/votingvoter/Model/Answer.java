@@ -4,23 +4,33 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "Answer")
+@Table(name = "answer")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    private Long answerId;
 
-    private String answerName;
-
-    private String answerText;
+    @Column
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date answerTime;
 
     @ManyToOne
-    @JoinColumn(name = "questionId")
-    private Question question;
+    @JoinColumn(name = "userId")
+    @NotNull
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "answerOptionId")
+    @NotNull
+    private AnswerOption answerOptionId;
 }

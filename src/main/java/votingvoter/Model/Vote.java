@@ -7,33 +7,32 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.validation.constraints.NotNull;
-import java.time.Instant;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "petition")
+@Table(name = "vote")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Petition {
+public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long petitionId;
+    private Long voteId;
 
-    private String header;
+    private String vote_text;
 
-    private String text;
-
-    private Instant expiration_time;
-
-    @OneToMany(mappedBy = "petitionId")
-    private Set<Vote> votes;
+    @NotNull
+    private Boolean vote;
 
     @Column
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    private Date voteTime;
+
+    @ManyToOne
+    @JoinColumn(name = "petitionId")
+    @NotNull
+    private Petition petitionId;
 
     @ManyToOne
     @JoinColumn(name = "userId")

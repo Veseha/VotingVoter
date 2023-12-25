@@ -10,25 +10,25 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "question")
+@Table(name = "answerOption")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Question {
+public class AnswerOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long questionId;
+    private Long answerId;
 
-    private String question_name;
+    private String answerName;
 
-    private String description;
+    private String answerText;
 
-    private Boolean required = false;
+
 
     @ManyToOne
-    @JoinColumn(name = "surveyId", nullable = false)
+    @JoinColumn(name = "questionId", nullable = false)
     @NotNull
-    private Survey surveyId;
+    private Question questionId;
 
-    @OneToMany(mappedBy = "questionId")
-    private Set<AnswerOption> answers;
+    @OneToMany(mappedBy = "answerOptionId")
+    private Set<Answer> answers;
 }

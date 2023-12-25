@@ -34,14 +34,14 @@ public class UserSer {
 
     // SET
     public void set(User employee){
-        User employee1 = employeeRep.getReferenceById(employee.getId());
+        User employee1 = employeeRep.getReferenceById(employee.getUserId());
         employee1.setFirstName(employee.getFirstName());
         employee1.setLastName(employee.getLastName());
         employeeRep.save(employee1);
     }
 
     public void setNew(User employee){
-        User employee1 = employeeRep.getReferenceById(employee.getId());
+        User employee1 = employeeRep.getReferenceById(employee.getUserId());
         employee1.setEnabled(true);
         employeeRep.save(employee1);
     }

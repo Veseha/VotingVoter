@@ -56,7 +56,7 @@ public class UserService implements IUserService {
     @Override
     public void deleteUser(Long id) {
         Optional<User> theUser = userRepository.findById(id);
-        theUser.ifPresent(user -> verificationTokenService.deleteUserToken(user.getId()));
+        theUser.ifPresent(user -> verificationTokenService.deleteUserToken(user.getUserId()));
         userRepository.deleteById(id);
     }
 }

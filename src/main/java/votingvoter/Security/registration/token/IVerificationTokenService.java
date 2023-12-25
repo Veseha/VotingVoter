@@ -6,9 +6,6 @@ import votingvoter.Model.User;
 
 import java.util.Optional;
 
-/**
- * @author Sampson Alfred
- */
 
 public interface IVerificationTokenService {
     String validateToken(String token);

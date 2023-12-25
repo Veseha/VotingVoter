@@ -4,27 +4,41 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.envers.Audited;
+import votingvoter.Model.Enum.Status;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "Survey")
+@Table(name = "survey")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    private Long survey_id;
 
-    private String surveyName;
+    private String survey_name;
 
     private String description;
 
+    @Column
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
-    @OneToMany(mappedBy = "Survey", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "surveyId")
     private Set<Question> questions;
+
+    private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    @NotNull
+    private User user;
+
 }

@@ -17,14 +17,13 @@ import java.util.Collection;
 @Entity
 @Data
 @Audited
-@Table(name="Users")
+@Table(name="users")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    private Long userId;
 
     private String firstName;
 
@@ -49,7 +48,7 @@ public class User  {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
