@@ -26,3 +26,4 @@ replay_pid*
 *.original
 
 !/src/main/java/votingvoter/Security/SecurityConst.java
+!/src/main/resources/application.properties
