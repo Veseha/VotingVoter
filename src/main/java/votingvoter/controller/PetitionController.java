@@ -29,8 +29,13 @@ public class PetitionController {
         return "displayPetitions";
     }
 
+    @GetMapping("/creationForm")
+    public String getPetitionForm(){
+        return "createPetition";
+    }
+
     @PostMapping("/add")
-    public String addPetition(@ModelAttribute("petition") Petition petition, User user, Model model, Principal principal){
+    public String addPetition( Petition petition){
         petitionService.createPetition(petition);
         return "redirect:/petition/list";
     }

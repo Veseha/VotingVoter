@@ -10,20 +10,24 @@ import votingvoter.Model.Petition;
 import votingvoter.Repository.PetitionRepository;
 import votingvoter.Security.user.PrincipalService;
 
+import javax.validation.constraints.NotNull;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
 public class PetitionService {
-    private PetitionRepository petitionRep;
+    private final PetitionRepository petitionRep;
     private Date date;
     private final PrincipalService principals;
     private final DateService dateService;
-    public void createPetition(Petition petition){
+    public void createPetition(@NotNull Petition petition){
+        petitionRep.save(petition);
         Petition newPetition = petitionRep.getReferenceById(petition.getPetitionId());
         newPetition.setHeader(petition.getHeader());
         newPetition.setText(petition.getText());
@@ -32,6 +36,7 @@ public class PetitionService {
         newPetition.setExpirationTime(petition.getExpirationTime());
         newPetition.setStatus(Status.OPEN);
         newPetition.setUser(petition.getUser());
+        petitionRep.deleteById(petition.getPetitionId());
         petitionRep.save(newPetition);
     }
 

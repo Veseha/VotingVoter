@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 import votingvoter.Model.Enum.Status;
 
 import javax.validation.constraints.NotNull;
@@ -26,7 +27,8 @@ public class Petition {
 
     private String text;
 
-    private Instant expirationTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private Date expirationTime;
 
     private Integer minNumberVotes;
 
