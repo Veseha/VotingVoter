@@ -1,0 +1,88 @@
+<section th:fragment="contentFragment">
+    <div class="container rounded shadow py-5" th:object="${user}">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4 shadow">
+                    <div class="card-body text-center ">
+                        <img src="pfp.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3"></h5>
+                        <div class="d-flex justify-content-center mb-2">
+                            <p th:text="${user.firstName}"></p>
+                            <p th:text="${user.lastName}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3 shadow">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <p class="mb-0">Petitions created: $</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <p class="mb-0">Something: </p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <p class="mb-0">Something: </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4 shadow">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0" th:text="${user.firstName}"></p>
+                                <p class="text-muted mb-0" th:text="${user.lastName}"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0" >Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0" th:text="${user.email}"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0" th:text="${user.phone}"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">IIN</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0" th:text="${user.iin}"></p>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row shadow ms-1 mb-4 me-2" th:each="petition: ${petitions}">
+                    <div class="card mb-4 mb-md-0">
+                        <div class="card-body" >
+                            <strong th:text="${petition.header}"></strong>
+                            <p th:text="${petition.text}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>

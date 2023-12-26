@@ -1,6 +1,8 @@
 package votingvoter.controller;
 
+import votingvoter.Model.Petition;
 import votingvoter.Model.User;
+import votingvoter.ModelService.PetitionService;
 import votingvoter.ModelService.UserSer;
 import votingvoter.Security.user.PrincipalService;
 import votingvoter.Security.utility.CurrentUser;
@@ -18,6 +20,7 @@ public class MainPage {
 
     private final UserSer employeeS;
     private final PrincipalService principalS;
+    private final PetitionService petitionService;
 
     @GetMapping("/")
     public String homePage(Model model, Principal principal){
@@ -40,5 +43,13 @@ public class MainPage {
         return "login";
     }
 
+    @GetMapping("/profile")
+    public String getProfile(Model model, Principal principal){
+        model.addAttribute("contentFragment", "/frag/displayProfile");
+        model.addAttribute("pageTitle", "Profile");
+        model.addAttribute("user", principalS.getEmployee(principal));
+        model.addAttribute("petitions", petitionService.getPetitionList());
 
+        return "template";
+    }
 }
