@@ -3,11 +3,9 @@ package votingvoter.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import votingvoter.Model.Petition;
+import votingvoter.Model.Vote;
 import votingvoter.ModelService.PetitionService;
 import votingvoter.ModelService.VoteService;
 import votingvoter.Repository.PetitionRepository;
@@ -24,34 +22,37 @@ public class VoteController {
     private final PetitionService petitionService;
     private final VoteService voteService;
 
-    @GetMapping("/list")
-    public String getPetitionList(Model model, Principal principal){
-        model.addAttribute("petitions", petitionService.getPetitionList());
-        model.addAttribute("userid", principals.getEmployee(principal).getUserId());
-        model.addAttribute("contentFragment", "/frag/petition/display-petitions");
-        model.addAttribute("pageTitle", "List petition");
+//    @GetMapping("/list")
+//    public String getPetitionList(Model model, Principal principal){
+//        model.addAttribute("petitions", petitionService.getPetitionList());
+//        model.addAttribute("userid", principals.getEmployee(principal).getUserId());
+//        model.addAttribute("contentFragment", "/frag/petition/display-petitions");
+//        model.addAttribute("pageTitle", "List petition");
+//
+//        return "template";
+//    }
 
+    @GetMapping("/{id}")
+    public String voteForm(Model model,  @PathVariable("id") Long id, Principal principal){
+        Petition petition =  petitionService.getPetiton(id);
+        if(!voteService.isAlreasyVoted(principal, petition)){
+            model.addAttribute("contentFragment", "/frag/petition/send-vote");
+            model.addAttribute("pageTitle", "Vote");
+            model.addAttribute("petittion",petition);
+        }
+        else
+            model.addAttribute("contentFragment", "/fragment/access-denied");
         return "template";
     }
 
-    @GetMapping("/add")
-    public String getPetitionForm(Model model){
-        model.addAttribute("contentFragment", "/frag/petition/create-petitions");
-        model.addAttribute("pageTitle", "Add petition");
-
+    @PostMapping("/{id}")
+    public String addPetition(@ModelAttribute("vote") Vote vote, Principal principal, @PathVariable("id") Long id, Model model){
+        Petition petition =  petitionService.getPetiton(id);
+        if(!voteService.isAlreasyVoted(principal, petition)){
+            petitionService.createPetition(petition, principal);
+            return "redirect:/petition/list";
+        }
+        model.addAttribute("contentFragment", "/fragment/access-denied");
         return "template";
-    }
-
-    @PostMapping("/add")
-    public String addPetition(Petition petition, Principal principal){
-        petitionService.createPetition(petition, principal);
-        return "redirect:/petition/list";
-    }
-
-    @PostMapping("/del")
-    public String deletePetition(@ModelAttribute("petition") Petition petition, Principal principal, Model model){
-//        System.out.println(petition.getPetitionId());
-        petitionService.deletePetition(petition, principal);
-        return "redirect:/petition/list";
     }
 }

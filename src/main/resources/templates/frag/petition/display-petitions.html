@@ -22,10 +22,10 @@
                                 <p th:text="${petition.created}">Created:</p>
                             </div>
                             <div class="col-6">
-                                <form th:action="@{...\sign}" th:object="${petition}" class="form-group" method="post">
+                                <form th:action="@{/vote/{id}(id=${petition.petitionId})}"  class="form-group" method="get">
                                     <div style="display: none">
                                         <input type="text" class="form-control" id="delPetition" name="id"></div>
-                                    <button type="submit"  class="btn btn-secondary">Sign petition</button>
+                                    <button type="submit"  class="btn btn-secondary">Vote</button>
                                 </form>
                                 <form class="form-group" action="#" th:action="@{/petition/del}" th:object="${petition}" method="post">
                                     <input name="petitionId"  th:value="${petition.petitionId}" style="display: none">

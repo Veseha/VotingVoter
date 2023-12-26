@@ -55,4 +55,7 @@ public class PetitionService {
             petitionRep.deleteById(petition.getPetitionId());
         }
     }
+    public Petition getPetiton(Long id){
+        return petitionRep.getReferenceById(id);
+    }
 }
