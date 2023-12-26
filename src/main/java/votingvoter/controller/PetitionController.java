@@ -55,7 +55,7 @@ public class PetitionController {
     }
 
     @PostMapping("/add")
-    public String addPetition( Petition petition, Principal principal){
+    public String addPetition(Petition petition, Principal principal){
         petitionService.createPetition(petition, principal);
         return "redirect:/petition/list";
     }

@@ -38,18 +38,19 @@ public class VoteController {
         if(!voteService.isAlreasyVoted(principal, petition)){
             model.addAttribute("contentFragment", "/frag/petition/send-vote");
             model.addAttribute("pageTitle", "Vote");
-            model.addAttribute("petittion",petition);
+            model.addAttribute("petition", petition);
         }
         else
             model.addAttribute("contentFragment", "/fragment/access-denied");
         return "template";
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/add/{id}")
     public String addPetition(@ModelAttribute("vote") Vote vote, Principal principal, @PathVariable("id") Long id, Model model){
-        Petition petition =  petitionService.getPetiton(id);
+        Petition petition = petitionService.getPetiton(id);
         if(!voteService.isAlreasyVoted(principal, petition)){
             petitionService.createPetition(petition, principal);
+            voteService.addVote(vote, principal, petition);
             return "redirect:/petition/list";
         }
         model.addAttribute("contentFragment", "/fragment/access-denied");

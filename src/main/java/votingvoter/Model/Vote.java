@@ -19,8 +19,6 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long voteId;
 
-    private String vote_text;
-
     @NotNull
     private Boolean vote;
 

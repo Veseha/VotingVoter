@@ -7,26 +7,24 @@
                     <div class="card-body p-5 text-center">
                         <div>
                             <div class="row mt-2">
-                                <h2 class="m-3">Petition answer</h2>
+                                <h2 class="m-3">Vote</h2>
                             </div>
-                            <form th:action="@{/petition/add}" method="post" th:object="${petition}" class="px-4">
+                            <form th:action="@{/vote/add/{id}(id=${petition.petitionId})}" method="post" th:object="${petition}" class="px-4">
                                 <label for="header" class="col-sm-5 col-form-label">Header</label>
-                                <input type="text"  id="header" autofocus="autofocus"
-                                       class="form-control mb-3" required name="header" >
-
-                                <label for="text" class="col-sm-5 col-form-label ">Text</label>
-                                <textarea id="text" autofocus="autofocus"
-                                          class="form-control mb-3" required name="text" ></textarea>
-
-                                <label for="numbervotes" class="col-sm-5 col-form-label">Number of votes required</label>
-                                <input type="number"  id="numbervotes" autofocus="autofocus"
-                                       class="form-control mb-3" required name="minNumberVotes" >
-
-                                <label for="expirationTime" class="col-sm-5 col-form-label">Valid until</label>
-                                <input id="expirationTime" autofocus="autofocus" type="date"
-                                       class="form-control mb-3" required name="expirationTime">
+                                <p id="header"  autofocus="autofocus" th:text="${petition.header}"
+                                   class="mb-3"></p>
+                                <hr class="mb-2">
+                                <label for="text" class="col-sm-5 col-form-label" th:text="${petition.text}">Text</label>
+                                <p id="text" autofocus="autofocus"
+                                          class=" mb-3"></p>
+                                <hr class="mb-2">
+                                <label for="check" class="form-label">Allow usage of personal information</label>
+                                <input type="checkbox"  id="check" autofocus="autofocus" checked="checked" value="true"
+                                       class="form-check-input mb-3" name="vote">
+                                <label for="check">I agree</label>
+                                <hr class="mb-2">
                                 <div class="mb-3 row">
-                                    <button type="submit" class="btn btn-warning">Create</button>
+                                    <button type="submit" class="btn btn-warning">Vote</button>
                                     <br>
 
                                 </div>
