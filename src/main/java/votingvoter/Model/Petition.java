@@ -33,8 +33,7 @@ public class Petition {
     @OneToMany(mappedBy = "petitionId")
     private Set<Vote> votes;
 
-    @OneToMany(mappedBy = "surveyId")
-    private Set<Question> questions;
+
     private Status status;
 
     @Column

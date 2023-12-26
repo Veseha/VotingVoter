@@ -5,6 +5,18 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
     </content>
   </component>
+  <component name="FacetManager">
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" value="c51508f7-ab70-497d-92c4-314fa210d9d8" />
+        </datasource-mapping>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
+  </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="795c4731-db76-4914-9562-35c40905624f" />
   </component>

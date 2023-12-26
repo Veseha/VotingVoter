@@ -32,6 +32,7 @@ public class Survey {
 
     @OneToMany(mappedBy = "surveyId")
     private Set<Question> questions;
+
     private Status status;
 
     @ManyToOne
