@@ -25,16 +25,36 @@
                                 <form th:action="@{...\sign}" th:object="${petition}" class="form-group" method="post">
                                     <div style="display: none">
                                         <input type="text" class="form-control" id="delPetition" name="id"></div>
-                                    <button type="submit"  class="btn btn-outline-dark">Sign petition</button>
+                                    <button type="submit"  class="btn btn-secondary">Sign petition</button>
                                 </form>
+                                <form class="form-group" action="#" th:action="@{/petition/del}" th:object="${petition}" method="post">
+                                    <input name="petitionId"  th:value="${petition.petitionId}" style="display: none">
+<!--                                    <input name="user"  th:value="${petition.user}" style="display: none">-->
+                                    <button class="btn btn-danger" onclick="" th:data-id="${petition.petitionId}"  th:if="${petition.user.userId == userid}"  th:disabled="${petition.user.userId != userid}" title="delete">
+                                        <i id="themeIcon_2" class="fas fa-trash"></i>
+                                        <span></span>
+                                    </button>
+                                </form>
+                                    <button class="btn btn-primary" onclick="" th:data-id="${petition.petitionId}"  title="view">
+                                        <i id="themeIcon_3" class="fas fa-eye"></i>
+                                        <span></span>
+                                    </button>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var message = /*[[${petition}]]*/ 'default';
+            console.log(message)
+            /*]]>*/
+        </script>
     </div>
     </div>
+
 </div>
 
 

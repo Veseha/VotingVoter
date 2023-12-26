@@ -23,8 +23,9 @@ public class PetitionController {
     private final PetitionService petitionService;
 
     @GetMapping("/list")
-    public String getPetitionList(Model model){
+    public String getPetitionList(Model model, Principal principal){
         model.addAttribute("petitions", petitionService.getPetitionList());
+        model.addAttribute("userid", principals.getEmployee(principal).getUserId());
         model.addAttribute("contentFragment", "/frag/petition/display-petitions");
         model.addAttribute("pageTitle", "List petition");
 
@@ -40,13 +41,14 @@ public class PetitionController {
     }
 
     @PostMapping("/add")
-    public String addPetition( Petition petition){
-        petitionService.createPetition(petition);
+    public String addPetition( Petition petition, Principal principal){
+        petitionService.createPetition(petition, principal);
         return "redirect:/petition/list";
     }
 
     @PostMapping("/del")
     public String deletePetition(@ModelAttribute("petition") Petition petition, Principal principal, Model model){
+//        System.out.println(petition.getPetitionId());
         petitionService.deletePetition(petition, principal);
         return "redirect:/petition/list";
     }

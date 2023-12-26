@@ -1,0 +1,41 @@
+<div class="container" th:fragment="contentFragment">
+    <!--<section class="vh-100" style="background-color: #d9d9d9;">-->
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <div>
+                            <div class="row mt-2">
+                                <h2 class="m-3">Petition answer</h2>
+                            </div>
+                            <form th:action="@{/petition/add}" method="post" th:object="${petition}" class="px-4">
+                                <label for="header" class="col-sm-5 col-form-label">Header</label>
+                                <input type="text"  id="header" autofocus="autofocus"
+                                       class="form-control mb-3" required name="header" >
+
+                                <label for="text" class="col-sm-5 col-form-label ">Text</label>
+                                <textarea id="text" autofocus="autofocus"
+                                          class="form-control mb-3" required name="text" ></textarea>
+
+                                <label for="numbervotes" class="col-sm-5 col-form-label">Number of votes required</label>
+                                <input type="number"  id="numbervotes" autofocus="autofocus"
+                                       class="form-control mb-3" required name="minNumberVotes" >
+
+                                <label for="expirationTime" class="col-sm-5 col-form-label">Valid until</label>
+                                <input id="expirationTime" autofocus="autofocus" type="date"
+                                       class="form-control mb-3" required name="expirationTime">
+                                <div class="mb-3 row">
+                                    <button type="submit" class="btn btn-warning">Create</button>
+                                    <br>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</section>-->
+</div>
