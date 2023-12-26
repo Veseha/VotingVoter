@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 @Service
@@ -35,5 +36,8 @@ public class VoteService {
 
     public boolean isAlreasyVoted(Principal principal, Petition petition){
         return !voteRep.findAllByPetitionIdAndUser(petition, principalService.getEmployee(principal)).isEmpty();
+    }
+    public List<Vote> getVotesByPetittion(Petition petition){
+        return voteRep.findAllByPetitionId(petition);
     }
 }

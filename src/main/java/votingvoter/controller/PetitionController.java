@@ -3,16 +3,16 @@ package votingvoter.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import votingvoter.Model.Petition;
+import votingvoter.Model.Vote;
 import votingvoter.ModelService.PetitionService;
+import votingvoter.ModelService.VoteService;
 import votingvoter.Repository.PetitionRepository;
 import votingvoter.Security.user.PrincipalService;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/petition")
@@ -21,6 +21,20 @@ public class PetitionController {
     private final PrincipalService principals;
     private final PetitionRepository petitionRep;
     private final PetitionService petitionService;
+    private final VoteService voteService;
+
+    @GetMapping("/{id}")
+    public String viewPetition(Model model, @PathVariable("id") Long id, Principal principal){
+        Petition petition =  petitionService.getPetiton(id);
+        List<Vote> votes = voteService.getVotesByPetittion(petition);
+
+        model.addAttribute("contentFragment", "/frag/petition/petition-view");
+        model.addAttribute("pageTitle", "Vote");
+        model.addAttribute("petittion",petition);
+        model.addAttribute("votes",votes);
+
+        return "template";
+    }
 
     @GetMapping("/list")
     public String getPetitionList(Model model, Principal principal){
