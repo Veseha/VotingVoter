@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import votingvoter.Security.SecurityConst;
+import votingvoter.SecurityConst;
 
 import java.util.Properties;
 

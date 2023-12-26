@@ -41,15 +41,4 @@ public class MainPage {
     }
 
 
-    @GetMapping("/example_of_controller")
-    public String example(Model model, Principal principal) {
-        User employee = principalS.getEmployee(principal);
-
-        model.addAttribute("contentFragment", "fragments/ppw/example");
-        model.addAttribute("pageTitle", "EXAMPLE");
-
-        return "template";
-    }
-
-
 }
