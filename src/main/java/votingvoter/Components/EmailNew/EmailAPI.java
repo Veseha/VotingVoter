@@ -1,11 +1,10 @@
 package votingvoter.Components.EmailNew;
 
-import votingvoter.Const;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import votingvoter.SecurityConst;
+import votingvoter.Security.SecurityConst;
 
 import java.util.Properties;
 
