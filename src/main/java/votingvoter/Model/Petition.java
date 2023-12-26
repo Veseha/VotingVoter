@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import votingvoter.Model.Enum.Status;
 
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
@@ -25,10 +26,16 @@ public class Petition {
 
     private String text;
 
-    private Instant expiration_time;
+    private Instant expirationTime;
+
+    private Integer minNumberVotes;
 
     @OneToMany(mappedBy = "petitionId")
     private Set<Vote> votes;
+
+    @OneToMany(mappedBy = "surveyId")
+    private Set<Question> questions;
+    private Status status;
 
     @Column
     @CreationTimestamp

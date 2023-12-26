@@ -5,4 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
     </content>
   </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="795c4731-db76-4914-9562-35c40905624f" />
+  </component>
 </module>

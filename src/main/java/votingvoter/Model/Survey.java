@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.envers.Audited;
 import votingvoter.Model.Enum.Status;
 
 import javax.validation.constraints.NotNull;
@@ -20,9 +19,9 @@ import java.util.Set;
 public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long survey_id;
+    private Long surveyId;
 
-    private String survey_name;
+    private String surveyName;
 
     private String description;
 
@@ -33,7 +32,6 @@ public class Survey {
 
     @OneToMany(mappedBy = "surveyId")
     private Set<Question> questions;
-
     private Status status;
 
     @ManyToOne
