@@ -22,19 +22,19 @@ public class MainPage {
     @GetMapping("/")
     public String homePage(Model model, Principal principal){
         System.out.println(CurrentUser.getEmail(principal));
-        model.addAttribute("contentFragment", "fragments/help");
+        model.addAttribute("contentFragment", "/frag/index");
         model.addAttribute("pageTitle", "Home");
 
         return "template";
     }
-    @GetMapping("/help")
-    public String helpPage(Model model, Principal principal){
-        System.out.println(CurrentUser.getEmail(principal));
-        model.addAttribute("contentFragment", "fragments/help");
-        model.addAttribute("pageTitle", "Home");
-
-        return "template";
-    }
+//    @GetMapping("/help")
+//    public String helpPage(Model model, Principal principal){
+//        System.out.println(CurrentUser.getEmail(principal));
+//        model.addAttribute("contentFragment", "fragments/help");
+//        model.addAttribute("pageTitle", "Home");
+//
+//        return "template";
+//    }
     @GetMapping("/login")
     public String login(){
         return "login";

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import votingvoter.Model.Enum.Status;
 import votingvoter.Model.Petition;
 import votingvoter.Repository.PetitionRepository;
+import votingvoter.Repository.VoteRep;
 import votingvoter.Security.user.PrincipalService;
 
 import javax.validation.constraints.NotNull;
@@ -23,9 +24,9 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class PetitionService {
     private final PetitionRepository petitionRep;
-    private Date date;
     private final PrincipalService principals;
     private final DateService dateService;
+    private final VoteRep voteRep;
     public void createPetition(@NotNull Petition petition){
         petitionRep.save(petition);
         Petition newPetition = petitionRep.getReferenceById(petition.getPetitionId());
@@ -36,6 +37,7 @@ public class PetitionService {
         newPetition.setExpirationTime(petition.getExpirationTime());
         newPetition.setStatus(Status.OPEN);
         newPetition.setUser(petition.getUser());
+        newPetition.setCountOfVote(voteRep.findAllByPetitionId(newPetition).size());
         petitionRep.deleteById(petition.getPetitionId());
         petitionRep.save(newPetition);
     }

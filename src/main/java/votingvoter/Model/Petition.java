@@ -48,4 +48,6 @@ public class Petition {
     @NotNull
     private User user;
 
+    private Integer countOfVote;
+
 }

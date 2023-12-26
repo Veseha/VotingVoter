@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import votingvoter.Model.Petition;
-import votingvoter.Model.User;
 import votingvoter.ModelService.PetitionService;
 import votingvoter.Repository.PetitionRepository;
 import votingvoter.Security.user.PrincipalService;
@@ -26,12 +25,18 @@ public class PetitionController {
     @GetMapping("/list")
     public String getPetitionList(Model model){
         model.addAttribute("petitions", petitionService.getPetitionList());
-        return "displayPetitions";
+        model.addAttribute("contentFragment", "/frag/petition/display-petitions");
+        model.addAttribute("pageTitle", "List petition");
+
+        return "template";
     }
 
-    @GetMapping("/creationForm")
-    public String getPetitionForm(){
-        return "createPetition";
+    @GetMapping("/add")
+    public String getPetitionForm(Model model){
+        model.addAttribute("contentFragment", "/frag/petition/create-petitions");
+        model.addAttribute("pageTitle", "Add petition");
+
+        return "template";
     }
 
     @PostMapping("/add")
