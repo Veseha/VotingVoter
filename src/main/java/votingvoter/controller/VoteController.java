@@ -41,7 +41,7 @@ public class VoteController {
             model.addAttribute("petition", petition);
         }
         else
-            model.addAttribute("contentFragment", "/fragment/access-denied");
+            model.addAttribute("contentFragment", "/fragments/access-denied");
         return "template";
     }
 
