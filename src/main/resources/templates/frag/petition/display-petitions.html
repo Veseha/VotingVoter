@@ -41,8 +41,8 @@
                                     </a>
 
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" th:value="@{localhost:10000/petition/{id}(id=${petition.petitionId})}">
-                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i id="themeIcon_5" class="fas fa-clipboard"></i></button>
+                                    <input id="copy1" type="text" class="form-control" readonly disabled placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" th:value="@{localhost:10000/petition/{id}(id=${petition.petitionId})}">
+                                    <button onclick="copyToBuf()" class="btn btn-outline-secondary" type="button" id="button-addon2"><i id="themeIcon_5" class="fas fa-clipboard"></i></button>
                                 </div>
 
 

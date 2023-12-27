@@ -309,11 +309,16 @@
         // Вызывать эту функцию при загрузке страницы
         loadThemeFromCookie();
 
+      function copyToBuf() {
+      var copyText = document.getElementById("copy1");
+
+      copyText.select();
+      copyText.setSelectionRange(0, 99999); // For mobile devices
+
+      navigator.clipboard.writeText(copyText.value);
+    }
+
     </script>
 
-<script>
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-</script>
 </body>
 </html>
