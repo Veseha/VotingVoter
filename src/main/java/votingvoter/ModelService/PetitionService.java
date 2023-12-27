@@ -28,7 +28,6 @@ public class PetitionService {
     private final DateService dateService;
     private final VoteRep voteRep;
     public void createPetition(@NotNull Petition petition, Principal principal){
-//        petitionRep.save(petition);
         Petition newPetition = new Petition();
         petitionRep.save(newPetition);
         newPetition.setHeader(petition.getHeader());
@@ -39,21 +38,22 @@ public class PetitionService {
         newPetition.setStatus(Status.OPEN);
         newPetition.setUser(principals.getEmployee(principal));
         newPetition.setCountOfVote(voteRep.findAllByPetitionId(newPetition).size());
-//        petitionRep.deleteById(petition.getPetitionId());
         petitionRep.save(newPetition);
     }
 
     public Iterable<Petition> getPetitionList(){
+        return petitionRep.findAllByStatusNot(Status.CLOSE);
+    }
+    public Iterable<Petition> getPetitionListAll(){
         return petitionRep.findAll(PageRequest.of(0, 10)).getContent();
     }
 
     public void deletePetition(Petition petition_, Principal principal){
         Petition petition = petitionRep.getReferenceById(petition_.getPetitionId());
-//        System.out.println("ok");
-//        System.out.println(principals.getEmployee(principal).getUserId());
-//        System.out.println(petition.getUser().getUserId());
         if(principals.getEmployee(principal) == petition.getUser() || principals.isAdmin(principal)){
-            petitionRep.deleteById(petition.getPetitionId());
+//            petitionRep.deleteById(petition.getPetitionId());
+            petition.setStatus(Status.CLOSE);
+            petitionRep.save(petition);
         }
     }
     public Petition getPetiton(Long id){
