@@ -28,7 +28,7 @@ public class PetitionService {
     private final DateService dateService;
     private final VoteRep voteRep;
     public void createPetition(@NotNull Petition petition, Principal principal){
-        petitionRep.save(petition);
+//        petitionRep.save(petition);
         Petition newPetition = petitionRep.getReferenceById(petition.getPetitionId());
         newPetition.setHeader(petition.getHeader());
         newPetition.setText(petition.getText());
@@ -38,7 +38,7 @@ public class PetitionService {
         newPetition.setStatus(Status.OPEN);
         newPetition.setUser(principals.getEmployee(principal));
         newPetition.setCountOfVote(voteRep.findAllByPetitionId(newPetition).size());
-        petitionRep.deleteById(petition.getPetitionId());
+//        petitionRep.deleteById(petition.getPetitionId());
         petitionRep.save(newPetition);
     }
 

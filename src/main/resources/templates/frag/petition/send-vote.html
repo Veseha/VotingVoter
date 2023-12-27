@@ -9,26 +9,81 @@
                             <div class="row mt-2">
                                 <h2 class="m-3">Vote</h2>
                             </div>
-                            <form th:action="@{/vote/add/{id}(id=${petition.petitionId})}" method="post" th:object="${petition}" class="px-4">
-                                <label for="header" class="col-sm-5 col-form-label">Header</label>
-                                <p id="header"  autofocus="autofocus" th:text="${petition.header}"
-                                   class="mb-3"></p>
-                                <hr class="mb-2">
-                                <label for="text" class="col-sm-5 col-form-label" th:text="${petition.text}">Text</label>
-                                <p id="text" autofocus="autofocus"
-                                          class=" mb-3"></p>
-                                <hr class="mb-2">
-                                <label for="check" class="form-label">Allow usage of personal information</label>
-                                <input type="checkbox"  id="check" autofocus="autofocus" checked="checked" value="true"
-                                       class="form-check-input mb-3" name="vote">
-                                <label for="check">I agree</label>
-                                <hr class="mb-2">
-                                <div class="mb-3 row">
-                                    <button type="submit" class="btn btn-warning">Vote</button>
-                                    <br>
 
+                            <form th:action="@{/vote/add/{id}(id=${petition.petitionId})}" method="post" th:object="${vote}" class="mx-auto text-center">
+                                <div class="petition-block mb-4">
+                                    <h3 th:text="${petition.header}" class="mb-3"></h3>
+                                    <p th:text="${petition.text}" class="mb-3"></p>
+                                </div>
+
+
+<!--                                <input type="radio" id="vote" name="vote" th:value="" class="form-check-input">-->
+
+
+                                <div class="checkboxes mb-4">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" id="disagree" name="vote" value="false" class="form-check-input">
+                                        <label for="disagree" class="form-check-label">Disagree</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" id="agree" name="vote" value="true" class="form-check-input">
+                                        <label for="agree" class="form-check-label">Agree</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-check mb-4">
+                                    <input type="checkbox" id="dataAgreement" class="form-check-input" required>
+                                    <label for="dataAgreement" class="form-check-label">I agree to the data collection</label>
+                                </div>
+
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-lg btn-warning">Vote</button>
                                 </div>
                             </form>
+
+
+
+                            <!--                            <form th:action="@{/vote/add/{id}(id=${petition.petitionId})}" method="post" th:object="${vote}" class="mx-auto text-center">-->
+<!--                                <label for="header" class="col-sm-12 col-form-label mb-3">Header</label>-->
+<!--                                <h3 th:text="${petition.header}" id="header" class="mb-3"></h3>-->
+
+<!--                                <label for="text" class="col-sm-12 col-form-label mb-3">Text</label>-->
+<!--                                <p th:text="${petition.text}" id="text" class="col-sm-12 mb-3"></p>-->
+
+<!--                                <label for="vote" class="form-label mb-3">Do you support this petition?</label>-->
+<!--                                <div class="form-check form-switch mb-3">-->
+
+<!--                                    <input type="checkbox" id="vote" class="form-check-input" value="true">-->
+<!--                                    <label class="form-check-label" for="vote">I agree</label>-->
+<!--                                </div>-->
+<!--                                <input type="checkbox" class="form-check-input" name="vote" value="">-->
+<!--                                <div class="mb-3">-->
+<!--                                    <button type="submit" class="btn btn-lg btn-warning">Vote</button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+
+
+
+<!--                            <form th:action="@{/vote/add/{id}(id=${petition.petitionId})}" method="post" th:object="${petition}" class="px-4">-->
+<!--                                <label for="header" class="col-sm-5 col-form-label">Header</label>-->
+<!--                                <p id="header"  autofocus="autofocus" th:text="${petition.header}"-->
+<!--                                   class="mb-3"></p>-->
+<!--                                <hr class="mb-2">-->
+<!--                                <label for="text" class="col-sm-5 col-form-label" th:text="${petition.text}">Text</label>-->
+<!--                                <p id="text" autofocus="autofocus"-->
+<!--                                          class=" mb-3"></p>-->
+<!--                                <hr class="mb-2">-->
+<!--                                <label for="check" class="form-label">Allow usage of personal information</label>-->
+<!--                                <input type="checkbox"  id="check" autofocus="autofocus" checked="checked" value="true"-->
+<!--                                       class="form-check-input mb-3" name="vote">-->
+<!--                                <label for="check">I agree</label>-->
+<!--                                <hr class="mb-2">-->
+<!--                                <div class="mb-3 row">-->
+<!--                                    <button type="submit" class="btn btn-warning">Vote</button>-->
+<!--                                    <br>-->
+
+<!--                                </div>-->
+<!--                            </form>-->
                         </div>
                     </div>
                 </div>

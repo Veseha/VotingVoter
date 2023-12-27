@@ -46,7 +46,7 @@ public class VoteController {
     }
 
     @PostMapping("/add/{id}")
-    public String addPetition(@ModelAttribute("vote") Vote vote, Principal principal, @PathVariable("id") Long id, Model model){
+    public String addPetition(@ModelAttribute("vote") Boolean vote, Principal principal, @PathVariable("id") Long id, Model model){
         Petition petition = petitionService.getPetiton(id);
         if(!voteService.isAlreasyVoted(principal, petition)){
             petitionService.createPetition(petition, principal);
