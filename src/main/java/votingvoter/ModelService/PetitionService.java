@@ -29,7 +29,8 @@ public class PetitionService {
     private final VoteRep voteRep;
     public void createPetition(@NotNull Petition petition, Principal principal){
 //        petitionRep.save(petition);
-        Petition newPetition = petitionRep.getReferenceById(petition.getPetitionId());
+        Petition newPetition = new Petition();
+        petitionRep.save(newPetition);
         newPetition.setHeader(petition.getHeader());
         newPetition.setText(petition.getText());
         newPetition.setCreated(dateService.getCurrentDate());
