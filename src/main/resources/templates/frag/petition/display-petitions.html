@@ -21,7 +21,7 @@
                             <div class="col-6">
                                 <p th:text="${petition.created}">Created:</p>
                             </div>
-                            <div class="col-6" style="display: flex; justify-content: space-around; align-items: center;">
+                            <div class="col-12" style="display: flex; justify-content: space-around; align-items: center;">
                                 <form th:action="@{/vote/{id}(id=${petition.petitionId})}"  class="form-group" method="get">
                                     <div style="display: none">
                                         <input type="text" class="form-control" id="delPetition" name="id"></div>
@@ -39,6 +39,26 @@
                                         <i id="themeIcon_3" class="fas fa-eye"></i>
                                         <span></span>
                                     </a>
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2" th:value="@{localhost:10000/petition/{id}(id=${petition.petitionId})}">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i id="themeIcon_5" class="fas fa-clipboard"></i></button>
+                                </div>
+
+
+<!--                                <div>-->
+<!--                                    <div>-->
+<!--                                        <div>-->
+<!--                                            <div>-->
+<!--                                                <input type="text" value="Hello@gmail.com">-->
+<!--                                                <button-->
+<!--                                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="copy to clipboard">-->
+<!--                                                    <i id="themeIcon_4" class="fas fa-clipboard"></i>-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
                             </div>
                         </div>
