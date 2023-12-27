@@ -77,6 +77,11 @@
                         <div class="card-body" >
                             <strong th:text="${petition.header}"></strong>
                             <p th:text="${petition.text}"></p>
+                            <hr class="m-2">
+                            <a class="btn btn-primary m-2" th:href="@{/petition/{id}(id=${petition.petitionId})}" th:data-id="${petition.petitionId}"  title="view">
+                                <i id="themeIcon_3" class="fas fa-eye"></i>
+                                <span></span>
+                            </a>
                         </div>
                     </div>
                 </div>

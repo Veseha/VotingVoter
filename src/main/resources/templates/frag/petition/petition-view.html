@@ -7,38 +7,55 @@
 <!--    </script>-->
 <div class="row">
     <!-- Статистика петиции -->
-    <div class="col-md-4">
-        <h4>Petition Statistics</h4>
-        <p>Signed: <span th:text="${votes.size}"></span></p>
-        <p>Needed: <span th:text="${petition.minNumberVotes}"></span></p>
-        <p>Percentage: <span th:text="${(votes.size / petition.minNumberVotes) * 100}"></span>%</p>
-    </div>
+
+        <div class="col-md-4">
+            <div class="card rounded shadow">
+                <div class="content m-3">
+                    <h4>Petition Statistics</h4>
+                    <p>Signed: <span th:text="${votes.size}"></span></p>
+                    <p>Needed: <span th:text="${petition.minNumberVotes}"></span></p>
+                    <p>Percentage: <span th:text="(${votes.size} / ${petition.minNumberVotes}) * 100"></span>%</p>
+                    <div class="progress rounded" style="height: 5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="(${votes.size} / ${petition.minNumberVotes}) * 100"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <!-- Содержание петиции -->
     <div class="col-md-4">
-        <h2 th:text="${petition.header}"></h2>
-        <p th:text="${petition.text}"></p>
+        <div class="card rounded shadow">
+            <div class="content m-3 text-center">
+                <h2 th:text="${petition.header}"></h2>
+                <p th:text="${petition.text}"></p>
+            </div>
+        </div>
     </div>
 
     <!-- Список голосов -->
     <div class="col-md-4">
-        <h4>Signatures</h4>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>User</th>
-                <th>Date</th>
-                <th>Accepted</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="vote : ${votes}">
-                <td th:text="${vote.user.getName()}"></td>
-                <td th:text="${#dates.format(vote.voteTime, 'yyyy-MM-dd HH:mm')}"></td>
-                <td th:text="${vote.vote ? 'Accepted' : 'Rejected'}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="card rounded shadow">
+            <div class="content m-3">
+                <h4>Signatures</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Date</th>
+                        <th>Accepted</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vote : ${votes}">
+                        <td th:text="${vote.user.getName()}"></td>
+                        <td th:text="${#dates.format(vote.voteTime, 'yyyy-MM-dd HH:mm')}"></td>
+                        <td th:text="${vote.vote ? 'Accepted' : 'Rejected'}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 </div>
