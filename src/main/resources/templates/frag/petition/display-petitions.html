@@ -35,10 +35,10 @@
                                         <span></span>
                                     </button>
                                 </form>
-                                    <button class="btn btn-primary m-2" onclick="" th:data-id="${petition.petitionId}"  title="view">
+                                    <a class="btn btn-primary m-2" th:href="@{/petition/{id}(id=${petition.petitionId})}" th:data-id="${petition.petitionId}"  title="view">
                                         <i id="themeIcon_3" class="fas fa-eye"></i>
                                         <span></span>
-                                    </button>
+                                    </a>
 
                             </div>
                         </div>

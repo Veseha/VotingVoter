@@ -30,7 +30,7 @@ public class PetitionController {
 
         model.addAttribute("contentFragment", "/frag/petition/petition-view");
         model.addAttribute("pageTitle", "Vote");
-        model.addAttribute("petittion",petition);
+        model.addAttribute("petition",petition);
         model.addAttribute("votes",votes);
 
         return "template";
