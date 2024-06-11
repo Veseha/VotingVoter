@@ -48,37 +48,6 @@ public class PetitionController {
         return "template";
     }
 
-//    @GetMapping("/download/{id}")
-//    public void downloadFile(@PathVariable("id")Long id, HttpServletResponse response) throws IOException {
-//        Petition document = petitionRep.readPetition(id);
-//
-//        byte[] fileArray = document.getDocumentData();
-//
-//        response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM.getType());
-//        response.setHeader("Content Disposion", "Attachment; filename " + document.getHeader());
-//        response.setContentLength(fileArray.length);
-//
-//        OutputStream os = response.getOutputStream();
-//        try{
-//            os.write(fileArray, 0, fileArray.length);
-//        } finally {
-//            os.close();
-//        }
-//    }
-
-//    @PostMapping("/uploadDocument")
-//    public String uploadDocument(Model model, MultipartFile file)throws IOException{
-//
-//        StringBuilder fileNames = new StringBuilder();
-//        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
-//        fileNames.append(file.getOriginalFilename());
-//        Files.write(fileNameAndPath, file.getBytes());
-//        System.out.println(fileNames);
-//        model.addAttribute("msg", "Uploaded documents: " + fileNames.toString());
-//
-//        return "redirect:/petition/list";
-//    }
-
     @GetMapping("/list")
     public String getPetitionList(Model model, Principal principal){
         model.addAttribute("petitions", petitionService.getPetitionList());

@@ -47,7 +47,7 @@ public class DocumentService {
         if(fileStorageProperties.getLocation().trim().isEmpty()) {
             throw new StorageException("File cannot be empty");
         }
-        rootLocation = Paths.get(fileStorageProperties.getLocation());
+        rootLocation = Paths.get(fileStorageProperties.getLocation()).toAbsolutePath();
 
         System.out.println("initialized successfully");
         try {
@@ -57,8 +57,7 @@ public class DocumentService {
         }
     }
 
-
-    public ResponseEntity<?> saveContent(MultipartFile file) throws Exception {
+    public void saveContent(MultipartFile file) throws Exception {
         Optional<Document> f = docRep.findById(store(file));
 
         if(f.isPresent()){
@@ -67,32 +66,28 @@ public class DocumentService {
             contentStore.setContent(f.get(), file.getInputStream());
             docRep.save(f.get());
 
-            return new ResponseEntity<Object>(HttpStatus.OK);
         } else {
-            return null;
+            throw new FileNotFoundException("Unable to store file");
         }
     }
 
     public Long store(MultipartFile file) throws Exception{
-        String location = fileSystemRepository.saveFile(file.getBytes(), file.getName());
         try{
             if (file.isEmpty()){
                 throw new StorageException("Failed to store file");
             }
-            Path destinationFile = this.rootLocation.resolve(Paths.get(file.getOriginalFilename()).normalize().toAbsolutePath());
-            System.out.println(destinationFile.getParent());
+            Path destinationFile = rootLocation.resolve(Paths.get(file.getOriginalFilename()).normalize());
 //            if(!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())){
 //                throw new StorageException("Cannot store file outside directory");
 //            }
             try(InputStream inputStream = file.getInputStream()){
                 Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
             }
+            return docRep.save(new Document(file.getOriginalFilename(), file.getBytes(), destinationFile.toFile().getPath())).getId();
 
         } catch (IOException exception){
             throw new StorageException("Failed to store file.", exception);
         }
-
-        return docRep.save(new Document(file.getName(), location)).getId();
     }
 
     public FileSystemResource find(Long fileId){

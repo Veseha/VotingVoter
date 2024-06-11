@@ -11,25 +11,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.Objects;
 
 
 @Repository
     public class FileSystemRepository {
-    String RESOURCE_DIR = FileSystemRepository.class.getResource("/").getPath();
-
-    public String saveFile(byte[] content, String fileName) throws Exception{
-        try {
-            Path newFile = Paths.get(RESOURCE_DIR + new Date().getTime() + "-" + fileName);
-            Files.createDirectories(newFile.getParent());
-
-            Files.write(newFile, content);
-
-            return newFile.toAbsolutePath().toString();
-        } catch (Exception e){
-            throw new FileNotFoundException("Unable to get path");
-        }
-    }
-
     public FileSystemResource findInFileSystem(String location){
         try{
             return new FileSystemResource(Paths.get(location));

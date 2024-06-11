@@ -47,6 +47,9 @@ public class Petition {
     @NotNull
     private User user;
 
+    @OneToOne
+    private Document document;
+
     private Integer countOfVote;
 
 }

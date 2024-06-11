@@ -29,8 +29,9 @@ public class Document {
 
     private String contentMimeType = "text/plain";
 
-    public Document(String fileName, String location) {
+    public Document(String fileName, byte[] data, String location) {
         this.name = fileName;
+        this.documentData = data;
         this.location = location;
     }
 }

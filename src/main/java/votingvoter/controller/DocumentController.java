@@ -29,10 +29,10 @@ public class DocumentController {
         return "template";
     }
 
-
     @PostMapping("/upload")
-    public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws Exception {
-        return documentService.saveContent(file);
+    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws Exception {
+        documentService.saveContent(file);
+        return "redirect:/petition/list";
     }
 
     @GetMapping(value = "/upload/{id}", produces = MediaType.APPLICATION_PDF_VALUE)
