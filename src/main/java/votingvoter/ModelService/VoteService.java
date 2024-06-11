@@ -33,4 +33,8 @@ public class VoteService {
     public List<Vote> getVotesByPetittion(Petition petition){
         return voteRep.findAllByPetitionId(petition);
     }
+
+    public void nullifyReference(Vote vote){
+        vote.setPetitionId(null);
+    }
 }

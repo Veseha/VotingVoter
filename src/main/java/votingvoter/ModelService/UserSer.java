@@ -36,6 +36,7 @@ public class UserSer {
     public void set(User employee){
         User employee1 = employeeRep.getReferenceById(employee.getUserId());
         employee1.setFirstName(employee.getFirstName());
+        employee1.setSurname(employee.getSurname());
         employee1.setLastName(employee.getLastName());
         employeeRep.save(employee1);
     }

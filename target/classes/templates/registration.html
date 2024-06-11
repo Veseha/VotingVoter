@@ -19,11 +19,11 @@
                                     Registration successful,
                                     please check your email to complete your registration.
                                 </div>
-                                <h2 class="m-3">User Registration Form</h2>
+                                <h2 class="m-3">Регистрация</h2>
                             </div>
                             <form th:action="@{/registration/register}" method="post" th:object="${user}" class="px-4">
                                 <div class="mb-3 row">
-                                    <label for="firstName" class="col-sm-5 col-form-label">First Name</label>
+                                    <label for="firstName" class="col-sm-5 col-form-label">Имя</label>
                                     <div class="col-sm-7">
                                         <input type="text"  id="firstName" autofocus="autofocus"
                                                class="form-control" required name="firstName" th:field="*{firstName}" >
@@ -31,7 +31,7 @@
                                 </div>
 
                                 <div class="mb-3 row">
-                                    <label for="lastName" class="col-sm-5 col-form-label">Last Name</label>
+                                    <label for="lastName" class="col-sm-5 col-form-label">Фамилия</label>
                                     <div class="col-sm-7">
                                         <input type="text"  id="lastName" autofocus="autofocus"
                                                class="form-control" required name="lastName" th:field="*{lastName}" >
@@ -39,7 +39,15 @@
                                 </div>
 
                                 <div class="mb-3 row">
-                                    <label for="email" class="col-sm-5 col-form-label">Email</label>
+                                    <label for="surname" class="col-sm-5 col-form-label">Отчество</label>
+                                    <div class="col-sm-7">
+                                        <input type="text"  id="surname" autofocus="autofocus"
+                                               class="form-control" required name="surname" th:field="*{surname}" >
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 row">
+                                    <label for="email" class="col-sm-5 col-form-label">Электронная почта</label>
                                     <div class="col-sm-7">
                                         <input type="text"  id="email" autofocus="autofocus"
                                                class="form-control" required name="email" th:field="*{email}" >
@@ -47,19 +55,19 @@
                                 </div>
 
                                 <div class="mb-3 row">
-                                    <label for="password" class="col-sm-5 col-form-label">Password</label>
+                                    <label for="password" class="col-sm-5 col-form-label">Пароль</label>
                                     <div class="col-sm-7">
                                         <input type="password"  id="password" autofocus="autofocus"
                                                class="form-control" required name="password" th:field="*{password}" >
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
-                                    <button type="submit" class="btn btn-warning">Register</button>
+                                    <button type="submit" class="btn btn-warning">Подтвердить</button>
                                     <br>
 
                                 </div>
-                                <span>Registered already? <a href="/" th:href="@{/login}">
-                                     Login here.
+                                <span>Уже зарегистрированы? <a href="/" th:href="@{/login}">
+                                     Войти
                                  </a></span>
                             </form>
                         </div>

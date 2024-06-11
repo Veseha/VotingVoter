@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -27,7 +28,7 @@ public class Vote {
     @Temporal(TemporalType.TIMESTAMP)
     private Date voteTime;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "petitionId")
     @NotNull
     private Petition petitionId;

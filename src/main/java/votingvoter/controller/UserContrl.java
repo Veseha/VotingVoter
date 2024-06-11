@@ -28,8 +28,6 @@ public class UserContrl {
         return "redirect:/employee/list";
     }
 
-
-
     @GetMapping("/list")
     public String showEmployeeList(Model model,  Principal principal) {
 
@@ -79,7 +77,7 @@ public class UserContrl {
         User employee = principalS.getEmployee(principal);
         User employee_ent = employeeS.get(id);
 //        if(ModelAccess.apply(model, employeeS.isCanDelete(employee, employee_ent)) || employeeS.isAdminAccess(employee)){
-            employeeS.delete(employee_ent);
+            employee.setEnabled(false);
             return "redirect:/employee/list";
 
 //        }

@@ -13,4 +13,5 @@ import java.util.List;
 public interface VoteRep extends JpaRepository<Vote, Long> {
     public List<Vote> findAllByPetitionId(Petition petition);
     public List<Vote> findAllByPetitionIdAndUser(Petition petition, User user);
+
 }

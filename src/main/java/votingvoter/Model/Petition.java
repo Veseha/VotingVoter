@@ -32,9 +32,8 @@ public class Petition {
 
     private Integer minNumberVotes;
 
-    @OneToMany(mappedBy = "petitionId")
+    @OneToMany(mappedBy = "petitionId", orphanRemoval = true, cascade = CascadeType.REMOVE)
     private Set<Vote> votes;
-
 
     private Status status;
 

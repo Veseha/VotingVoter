@@ -48,7 +48,7 @@ public class MainPage {
         model.addAttribute("contentFragment", "/frag/displayProfile");
         model.addAttribute("pageTitle", "Profile");
         model.addAttribute("user", principalS.getEmployee(principal));
-        model.addAttribute("petitions", petitionService.getPetitionList());
+        model.addAttribute("petitions", petitionService.getPetitionListOfUser(principal));
 
         return "template";
     }

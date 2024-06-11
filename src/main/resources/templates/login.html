@@ -95,18 +95,18 @@
 
                         <div class="row mt-4">
                             <div th:if="${param.error}" class="col-sm-12">
-                                <p class="alert alert-danger alert-dismissible fade show" role="alert">Invalid username or password</p>
+                                <p class="alert alert-danger alert-dismissible fade show" role="alert">Неверное имя пользователя или пароль</p>
                             </div>
 
                             <div th:if="${param.reset_success}" class="col-sm-12">
-                                <p class="alert alert-info alert-dismissible fade show" role="alert">You have successfully reset your password, please log in here.</p>
+                                <p class="alert alert-info alert-dismissible fade show" role="alert">Вы успешно сбросили пароль.</p>
                             </div>
 
                             <div th:if="${param.verified}" class="col-sm-12">
-                                <p class="alert alert-info alert-dismissible fade show" role="alert">This account has already been verified,  please log in here.</p>
+                                <p class="alert alert-info alert-dismissible fade show" role="alert">Этот аккаунт уже подтвержден.</p>
                             </div>
                             <div th:if="${param.valid}" class="col-sm-12">
-                                <p class="alert alert-info alert-dismissible">Email verified successfully, please log in here.</p>
+                                <p class="alert alert-info alert-dismissible">Ваша почта была успешно подтверждена, пожалуйста войдите в акканут.</p>
                             </div>
 
                             <!-- show logout warning alert when logged out. -->
@@ -117,9 +117,9 @@
 
                         <p th:text="${errorMessage}" style="color: red;"></p>
                         <form th:action="@{/login}" method="post" class="px-4">
-                            <h2 class="mb-4">User Login </h2>
+                            <h2 class="mb-4">Войти </h2>
                             <div class="mb-3 row">
-                                <label for="email" class="col-sm-3 col-form-label">Email</label>
+                                <label for="email" class="col-sm-6 col-form-label">Электронная почта</label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" id="email" name="email"
                                            required autofocus="autofocus">
@@ -127,7 +127,7 @@
                             </div>
 
                             <div class="mb-3 row">
-                                <label for="password" class="col-sm-3 col-form-label">Password</label>
+                                <label for="password" class="col-sm-6 col-form-label">Пароль</label>
                                 <div class="col-sm-6">
                                     <input type="password" class="form-control" name="password" id="password" required
                                            autofocus="autofocus">
@@ -135,12 +135,12 @@
                             </div>
 
                             <div class="mb-3">
-                                <button type="submit" name="login" id="login" class="btn btn-warning btn-lg btn-block"> Login</button>
+                                <button type="submit" name="login" id="login" class="btn btn-warning btn-lg btn-block"> Войти</button>
                                 <br>
                                 <br>
-                                <span> Not registered yet? <a href="#" th:href="@{/registration/registration-form}">Register.</a> </span>
+                                <span> Нет аккаунта? <a href="#" th:href="@{/registration/registration-form}">Зарегистрироваться.</a> </span>
                                 <div class="vr"></div>
-                                <span><a href="/" th:href="@{registration/forgot-password-request}">Forgot password.</a> </span>
+                                <span><a href="/" th:href="@{registration/forgot-password-request}">Забыли пароль?</a> </span>
                             </div>
                         </form>
                     </div>
