@@ -28,7 +28,7 @@ public class VoteService {
     }
 
     public boolean isAlreasyVoted(Principal principal, Petition petition){
-        return !voteRep.findAllByPetitionIdAndUser(petition, principalService.getEmployee(principal)).isEmpty();
+        return voteRep.findAllByPetitionIdAndUser(petition, principalService.getEmployee(principal)).isEmpty();
     }
     public List<Vote> getVotesByPetittion(Petition petition){
         return voteRep.findAllByPetitionId(petition);

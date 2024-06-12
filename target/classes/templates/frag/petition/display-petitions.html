@@ -26,12 +26,12 @@
                             </div>
                             <div class="col-12"
                                  style="display: flex; justify-content: space-around; align-items: center;">
-                                <form th:action="@{/vote/{id}(id=${petition.petitionId})}" class="form-group"
-                                      method="get">
-                                    <div style="display: none">
-                                        <input type="text" class="form-control" id="delPetition" name="id"></div>
-                                    <button type="submit" class="btn btn-secondary m-2">View</button>
-                                </form>
+<!--                                <form th:action="@{/vote/{id}(id=${petition.petitionId})}" class="form-group"-->
+<!--                                      method="get">-->
+<!--                                    <div style="display: none">-->
+<!--                                        <input type="text" class="form-control" id="delPetition" name="id"></div>-->
+<!--                                    <button type="submit" class="btn btn-secondary m-2">View</button>-->
+<!--                                </form>-->
                                 <form class="form-group" action="#" th:action="@{/petition/del}" th:object="${petition}"
                                       method="post">
                                     <input name="petitionId" th:value="${petition.petitionId}" style="display: none">
@@ -40,7 +40,6 @@
                                             th:if="${petition.user.userId == userid}"
                                             th:disabled="${petition.user.userId != userid}" title="delete">
                                         <i id="themeIcon_2" class="fas fa-trash"></i>
-                                        <span></span>
                                     </button>
                                 </form>
                                 <a class="btn btn-primary m-2" th:href="@{/petition/{id}(id=${petition.petitionId})}"

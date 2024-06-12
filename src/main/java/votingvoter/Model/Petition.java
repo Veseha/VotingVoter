@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
 import votingvoter.Model.Enum.Status;
 
@@ -25,7 +26,8 @@ public class Petition {
 
     private String header;
 
-    private String text;
+    @Column(columnDefinition = "text") //error: value too long for var(255)
+    private String text; // need to prepare migration script
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date expirationTime;
@@ -42,6 +44,7 @@ public class Petition {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
+    @Lazy
     @ManyToOne
     @JoinColumn(name = "userId")
     @NotNull

@@ -39,7 +39,6 @@ public class PetitionService {
         newPetition.setStatus(Status.OPEN);
         newPetition.setUser(principals.getEmployee(principal));
         newPetition.setCountOfVote(voteRep.findAllByPetitionId(newPetition).size());
-//        petitionRep.deleteById(petition.getPetitionId());
         petitionRep.save(newPetition);
 
     }

@@ -1,19 +1,22 @@
 <section th:fragment="contentFragment">
-    <form th:action="@{/document/upload}" method="post" enctype="multipart/form-data">
-        <label for="documentData" class="col-sm-5 col-form-label">Upload document</label>
-        <input id="documentData" type="file" autofocus="autofocus"
-               class="form-control mb-3" required name="file"/>
-        <span th:if="${message}" th:text="${message}"></span>
-        <div class="content-container m-3 rounded shadow">
-            <button class="btn btn-outline-warning" value="Upload" type="submit">Upload</button>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+                        <div>
+                            <div class="row mt-2">
+                                <h2 class="m-1">Приложите документ</h2>
+                            </div>
+                            <form th:action="@{/document/upload}" method="post" enctype="multipart/form-data">
+                                <input id="documentData" type="file" autofocus="autofocus"
+                                       class="form-control mb-3" required name="file"/>
+                                    <button class="btn btn-outline-warning" value="Upload" type="submit">Создать анкету</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
-
-    <div>
-        <ul>
-            <li th:each="file : ${files}">
-                <a th:href="${file}" th:text="${file}" />
-            </li>
-        </ul>
     </div>
 </section>

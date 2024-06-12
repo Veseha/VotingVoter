@@ -33,7 +33,6 @@ public class PetitionController {
     private final PetitionRepository petitionRep;
     private final PetitionService petitionService;
     private final VoteService voteService;
-    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir" + "/uploads");
 
     @GetMapping("/{id}")
     public String viewPetition(Model model, @PathVariable("id") Long id, Principal principal){
@@ -67,14 +66,13 @@ public class PetitionController {
     }
 
     @PostMapping("/add")
-    public String addPetition(Petition petition, Principal principal){
+    public String addPetition(Petition petition, Principal principal) throws Exception {
         petitionService.createPetition(petition, principal);
-        return "redirect:/petition/list";
+        return "redirect:/document/list";
     }
 
     @PostMapping("/del")
     public String deletePetition(@ModelAttribute("petition") Petition petition, Principal principal, Model model){
-//        System.out.println(petition.getPetitionId());
         petitionService.deletePetition(petition, principal);
         return "redirect:/petition/list?deleted";
     }

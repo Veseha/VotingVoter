@@ -21,17 +21,16 @@ public class Document {
 
     private String location;
 
-    @Lob
-    private byte[] documentData;
-
     @ContentId private String contentId;
     @ContentLength private Long contentLength;
 
     private String contentMimeType = "text/plain";
 
-    public Document(String fileName, byte[] data, String location) {
+    public Document(String fileName, String location) {
         this.name = fileName;
-        this.documentData = data;
         this.location = location;
     }
+
+    @OneToOne
+    private Petition petition;
 }

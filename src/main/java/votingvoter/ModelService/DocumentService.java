@@ -77,13 +77,13 @@ public class DocumentService {
                 throw new StorageException("Failed to store file");
             }
             Path destinationFile = rootLocation.resolve(Paths.get(file.getOriginalFilename()).normalize());
-//            if(!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())){
-//                throw new StorageException("Cannot store file outside directory");
-//            }
+            if(!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())){
+                throw new StorageException("Cannot store file outside directory");
+            }
             try(InputStream inputStream = file.getInputStream()){
                 Files.copy(inputStream, destinationFile, StandardCopyOption.REPLACE_EXISTING);
             }
-            return docRep.save(new Document(file.getOriginalFilename(), file.getBytes(), destinationFile.toFile().getPath())).getId();
+            return docRep.save(new Document(file.getOriginalFilename(), destinationFile.toFile().getPath())).getId();
 
         } catch (IOException exception){
             throw new StorageException("Failed to store file.", exception);
